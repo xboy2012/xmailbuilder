@@ -8,10 +8,14 @@
   "scripts": {
     "build": "gulp build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xboy2012/xmailbuilder.git"
+  },
   "keywords": [
     "email"
   ],
-  "author": "xboyliu",
+  "author": "xboy2012",
   "license": "UNLICENCED",
   "devDependencies": {
     "ajv": "^5.2.2",
