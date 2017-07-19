@@ -1,0 +1,18 @@
+//- 组件名称：单图超链接
+mixin IMG_LINK(node, parentNode)
+    -
+        var src = node.src;
+        var alt = node.alt;
+        var url = node.url;
+        var imgWith = node.imgWidth;
+        var imgHeight = node.imgHeight;
+    a(
+        href=url,
+        target='_blank'
+    )
+        img(
+            src=src || false,
+            alt=alt || false,
+            width=imgWith || false,
+            height=imgHeight || false
+        )

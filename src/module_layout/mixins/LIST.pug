@@ -1,0 +1,19 @@
+//- 组件名称：列表
+mixin LIST(node, parentNode)
+    -
+        var bulletColor = node.bulletColor;
+        var paddingLeft = node.paddingLeft;
+        var paddingRight = node.paddingRight;
+        var paddingTop = node.paddingTop;
+        var paddingBottom = node.paddingBottom;
+        var childNodes = node.childNodes;
+    ul(
+        style=parseStyle({
+            'margin': 0,
+            'list-style-type': 'disc',
+            'color': bulletColor,
+            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
+        })
+    )
+        each childNode in childNodes
+            +createPartialPug(childNode, node)

@@ -1,0 +1,20 @@
+//- 组件名称：文本框
+mixin TEXT(node, parentNode)
+    -
+        var text = node.text;
+        var fontColor = node.fontColor;
+        var fontSize = node.fontSize;
+        var lineHeight = node.lineHeight;
+        var paddingLeft = node.paddingLeft;
+        var paddingRight = node.paddingRight;
+        var paddingTop = node.paddingTop;
+        var paddingBottom = node.paddingBottom;
+    p(
+        style=parseStyle({
+            'color': fontColor,
+            'font-size': fontSize,
+            'line-height': lineHeight,
+            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
+        })
+    )
+        | #{text}

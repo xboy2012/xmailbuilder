@@ -1,0 +1,21 @@
+//- 组件名称：扫码关注
+mixin BLANK(node, parentNode)
+    - var height = node.height;
+
+    //- 在主框架内直接使用td渲染展示，无需额外容器
+    if parentNode.type === Types.MAIN
+        td(
+            style=parseStyle({
+                'height': height,
+                'line-height': height
+            })
+        )
+            | &nbsp;
+    else
+        div(
+            style=parseStyle({
+                'height': height,
+                'line-height': height
+            })
+        )
+            | &nbsp;

@@ -1,0 +1,13 @@
+-
+    var parseStyle = function(css) {
+        var rules = [];
+        for(var key in css) {
+            if(!css.hasOwnProperty(key))
+                continue;
+            var value = css[key];
+            if(value === false || value === undefined || value === null)
+                continue;
+            rules.push(key+':'+value);
+        }
+        return rules.length ? rules.join(';') : false;
+    };

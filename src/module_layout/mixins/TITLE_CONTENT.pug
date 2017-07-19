@@ -1,0 +1,47 @@
+//- 组件名称：标题头部+内容
+mixin TITLE_CONTENT(node, parentNode)
+    -
+        var title = node.title;
+        var bgColor = node.bgColor;
+        var fontSize = node.fontSize;
+        var fontColor = node.fontColor;
+        var lineHeight = node.lineHeight;
+        var childNodes = node.childNodes;
+        var paddingLeft = node.paddingLeft;
+        var paddingRight = node.paddingRight;
+        var paddingTop = node.paddingTop;
+        var paddingBottom = node.paddingBottom;
+
+    table.title.section(
+        style=parseStyle({
+            'background-color': bgColor
+        }),
+        bgcolor=bgColor || false
+    )
+        tbody
+            tr
+                th
+                    p(
+                        style=parseStyle({
+                            'color': fontColor,
+                            'background-image': bgColor && 'url("https://bqq.gtimg.com/qidian/src/themes/client/email/mail2-images/titleline_bg.png")',
+                            'background-size': bgColor && 'auto 100%'
+                        })
+                    )
+                        span(
+                            style=parseStyle({
+                                'background-color': bgColor && '#fff'
+                            })
+                        )
+                            =title
+            tr
+                td.content(
+                    style=parseStyle({
+                        'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                        'font-size': fontSize,
+                        'color': fontColor,
+                        'line-height': lineHeight
+                    })
+                )
+                    each childNode in childNodes
+                        +createPartialPug(childNode, node)

@@ -1,0 +1,28 @@
+//- 组件名称：主体
+mixin MAIN(node, parentNode)
+    -
+        var bgColor = node.bgColor;
+        var childNodes = node.childNodes;
+    html
+        head
+            meta(charset='utf-8')
+        body(
+            bgcolor=bgColor || false,
+            style=parseStyle({
+                'background-color': bgColor
+            })
+        )
+            .main(
+                style=parseStyle({
+                    'background-color': bgColor
+                })
+            )
+                table(align="center", width="640", border="0")
+                    tbody
+                        each childNode in childNodes
+                            tr
+                                if childNode.type === Types.BLANK
+                                    +createPartialPug(childNode, node)
+                                else
+                                    td
+                                        +createPartialPug(childNode, node)

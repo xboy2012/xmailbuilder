@@ -1,0 +1,15 @@
+import MAIN from '../config/MAIN';
+import IMG_CONTENT from '../config/IMG_CONTENT';
+import TITLE_CONTENT from '../config/TITLE_CONTENT';
+import BOTTOM_QR from '../config/BOTTOM_QR';
+import SIGNATURE from '../config/SIGNATURE';
+import IMG from '../config/IMG';
+import IMG_LINK from '../config/IMG_LINK';
+import CONTAINER from '../config/CONTAINER';
+import CONTAINER_DOUBLE from '../config/CONTAINER_DOUBLE';
+import TEXT from '../config/TEXT';
+import HTML from '../config/HTML';
+import BLANK from '../config/BLANK';
+import LIST from '../config/LIST';
+import LIST_ITEM from '../config/LIST_ITEM';
+export default {MAIN,IMG_CONTENT,TITLE_CONTENT,BOTTOM_QR,SIGNATURE,IMG,IMG_LINK,CONTAINER,CONTAINER_DOUBLE,TEXT,HTML,BLANK,LIST,LIST_ITEM};

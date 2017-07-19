@@ -1,0 +1,13 @@
+//- 组件名称：单图
+mixin IMG(node, parentNode)
+    -
+        var src = node.src;
+        var alt = node.alt;
+        var imgWith = node.imgWidth;
+        var imgHeight = node.imgHeight;
+    img(
+        src=src,
+        alt=(alt || false),
+        width=(imgWith || false),
+        height=(imgHeight || false)
+    )

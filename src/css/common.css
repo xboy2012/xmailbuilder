@@ -1,0 +1,71 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:not(.nolink) {
+    color: #0067ed;
+    cursor: pointer;
+}
+
+/**gulp-inline-css存在bug，第一个p样式死活不生效**/
+p {
+
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    display: inline-block;
+    border: none;
+    margin: auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse:collapse;
+    border: none;
+}
+
+.main {
+    font-family: Helvetica, "Helvetica Neue", "Helvetica Neue Light", HelveticaNeue-Light, '微软雅黑', 'Microsoft Yahei', Calibri, Arial, sans-serif;
+    margin: 0;
+    padding: 40px;
+}
+
+.main > table {
+    margin: auto;
+}
+
+.section {
+    background-color: #fff;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 640px;
+}
+
+.section.title > tbody > tr > th {
+    padding: 32px 40px 0;
+    font-weight: normal;
+}
+
+.section.title > tbody > tr > th > p {
+    text-align: center;
+    font-size: 26px;
+    margin: 0;
+}
+
+.section.title > tbody > tr > th > p > span {
+    padding:0 15px;
+}

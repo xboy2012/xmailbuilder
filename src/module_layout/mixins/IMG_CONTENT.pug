@@ -1,0 +1,43 @@
+//- 组件名称：图片头部+内容
+mixin IMG_CONTENT(node, parentNode)
+    -
+        var src = node.src;
+        var alt = node.alt;
+        var fontSize = node.fontSize;
+        var fontColor = node.fontColor;
+        var lineHeight = node.lineHeight;
+        var bgColor = node.bgColor;
+        var childNodes = node.childNodes;
+        var paddingLeft = node.paddingLeft;
+        var paddingRight = node.paddingRight;
+        var paddingTop = node.paddingTop;
+        var paddingBottom = node.paddingBottom;
+        var imgWith = node.imgWidth;
+        var imgHeight = node.imgHeight;
+
+    table.banner.section(
+        style=parseStyle({
+            'background-color': bgColor
+        }),
+        bgColor=bgColor || false
+    )
+        tbody
+            tr
+                td
+                    img(
+                        src=src || false,
+                        alt=alt || false,
+                        width=imgWith || false,
+                        height=imgHeight || false
+                    )
+            tr
+                td.content(
+                    style=parseStyle({
+                        'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                        'font-size': fontSize,
+                        'color': fontColor,
+                        'line-height': lineHeight
+                    })
+                )
+                    each childNode in childNodes
+                        +createPartialPug(childNode, node)

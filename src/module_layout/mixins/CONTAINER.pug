@@ -1,0 +1,18 @@
+//- 组件名称：容器
+mixin CONTAINER(node, parentNode)
+    -
+        var bgColor = node.bgColor;
+        var paddingLeft = node.paddingLeft;
+        var paddingRight = node.paddingRight;
+        var paddingTop = node.paddingTop;
+        var paddingBottom = node.paddingBottom;
+        var childNodes = node.childNodes;
+
+    div(
+        style=parseStyle({
+            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+            'background-color': bgColor
+        })
+    )
+        each childNode in childNodes
+            +createPartialPug(childNode, node)
