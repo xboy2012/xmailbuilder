@@ -648,7 +648,7 @@ var calculateImageSize = (node) => {
     return Promise.all(promises);
 };
 
-var index = (node, opts) => {
+const build = (node, opts) => {
     opts = Object.assign({
         minify: true
     }, opts);
@@ -699,4 +699,4 @@ var index = (node, opts) => {
     });
 };
 
-export default index;
+export { config, Types, build };

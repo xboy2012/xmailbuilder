@@ -1,4 +1,4 @@
-import Types from '../src/js/types';
+import {Types} from '../dist/index.es6';
 
 export default {
     type: Types.MAIN,

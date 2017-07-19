@@ -7,7 +7,10 @@ import htmlmin from 'htmlmin';
 import formatNode from './formatNode';
 import calculateImageSize from './calculateImageSize';
 
-export default (node, opts) => {
+import Types from './types';
+import config from './_generated/config';
+
+const build = (node, opts) => {
     opts = Object.assign({
         minify: true
     }, opts);
@@ -56,4 +59,11 @@ export default (node, opts) => {
 
         return html_code;
     });
+};
+
+
+export {
+    config,
+    Types,
+    build
 };

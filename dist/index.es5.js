@@ -1,6 +1,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.build = exports.Types = exports.config = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -683,7 +684,7 @@ var calculateImageSize = function calculateImageSize(node) {
     return Promise.all(promises);
 };
 
-var index = function index(node, opts) {
+var build = function build(node, opts) {
     opts = Object.assign({
         minify: true
     }, opts);
@@ -732,4 +733,6 @@ var index = function index(node, opts) {
     });
 };
 
-exports.default = index;
+exports.config = config;
+exports.Types = Types;
+exports.build = build;
