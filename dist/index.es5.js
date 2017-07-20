@@ -19,10 +19,6 @@ var _csso = require('csso');
 
 var _csso2 = _interopRequireDefault(_csso);
 
-var _htmlmin = require('htmlmin');
-
-var _htmlmin2 = _interopRequireDefault(_htmlmin);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function pug_attr(t, e, n, f) {
@@ -653,18 +649,14 @@ var calculateImageSize = function calculateImageSize(node) {
     return Promise.all(promises);
 };
 
-var build = function build(node, opts) {
-    opts = Object.assign({
-        minify: true
-    }, opts);
-
+var build = function build(node) {
     node = formatNode(node);
     return calculateImageSize(node).then(function () {
         var html_code = xtmpl({ node: node });
 
         var $ = _cheerio2.default.load(html_code, {
-            lowerCaseTags: opts.minify,
-            lowerCaseAttributeNames: opts.minify,
+            lowerCaseTags: true,
+            lowerCaseAttributeNames: true,
             decodeEntities: false,
             recognizeSelfClosing: true
         });
@@ -673,31 +665,19 @@ var build = function build(node, opts) {
             applyAttributesTableElements: true
         });
 
-        if (opts.minify) {
-            //删除id和class
-            $('[id]').removeAttr('id');
-            $('[class]').removeAttr('class');
+        //删除id和class
+        $('[id]').removeAttr('id');
+        $('[class]').removeAttr('class');
 
-            //压缩优化style
-            $('[style]').each(function (i, el) {
-                var $el = $(el);
-                var style = $el.attr('style');
-                style = _csso2.default.minifyBlock(style, {}).css;
-                $el.attr('style', style);
-            });
-        }
+        //压缩优化style
+        $('[style]').each(function (i, el) {
+            var $el = $(el);
+            var style = $el.attr('style');
+            style = _csso2.default.minifyBlock(style, {}).css;
+            $el.attr('style', style);
+        });
 
         html_code = $.html();
-
-        if (opts.minify) {
-            html_code = (0, _htmlmin2.default)(html_code, {
-                cssmin: false,
-                jsmin: false,
-                removeComments: true,
-                collapseWhitespace: true
-            });
-        }
-
         return html_code;
     });
 };

@@ -1,7 +1,6 @@
 import cheerio from 'cheerio';
 import juice from 'juice/client';
 import csso from 'csso';
-import htmlmin from 'htmlmin';
 
 function pug_attr(t,e,n,f){return e!==!1&&null!=e&&(e||"class"!==t&&"style"!==t)?e===!0?" "+(f?t:t+'="'+t+'"'):("function"==typeof e.toJSON&&(e=e.toJSON()),"string"==typeof e||(e=JSON.stringify(e),n||e.indexOf('"')===-1)?(n&&(e=pug_escape(e))," "+t+'="'+e+'"'):" "+t+"='"+e.replace(/'/g,"&#39;")+"'"):""}
 function pug_escape(e){var a=""+e,t=pug_match_html.exec(a);if(!t)return e;var r,c,n,s="";for(r=t.index,c=0;r<a.length;r++){switch(a.charCodeAt(r)){case 34:n="&quot;";break;case 38:n="&amp;";break;case 60:n="&lt;";break;case 62:n="&gt;";break;default:continue}c!==r&&(s+=a.substring(c,r)),c=r+1,s+=n;}return c!==r?s+a.substring(c,r):s}
@@ -607,18 +606,14 @@ var calculateImageSize = (node) => {
     return Promise.all(promises);
 };
 
-const build = (node, opts) => {
-    opts = Object.assign({
-        minify: true
-    }, opts);
-
+const build = (node) => {
     node = formatNode(node);
     return calculateImageSize(node).then(() => {
         let html_code = xtmpl({node});
 
         let $ = cheerio.load(html_code, {
-            lowerCaseTags: opts.minify,
-            lowerCaseAttributeNames: opts.minify,
+            lowerCaseTags: true,
+            lowerCaseAttributeNames: true,
             decodeEntities: false,
             recognizeSelfClosing: true
         });
@@ -627,33 +622,20 @@ const build = (node, opts) => {
             applyAttributesTableElements: true
         });
 
+        //删除id和class
+        $('[id]').removeAttr('id');
+        $('[class]').removeAttr('class');
 
-        if(opts.minify) {
-            //删除id和class
-            $('[id]').removeAttr('id');
-            $('[class]').removeAttr('class');
-
-            //压缩优化style
-            $('[style]').each((i, el) => {
-                let $el = $(el);
-                let style = $el.attr('style');
-                style = csso.minifyBlock(style, {}).css;
-                $el.attr('style', style);
-            });
-        }
+        //压缩优化style
+        $('[style]').each((i, el) => {
+            let $el = $(el);
+            let style = $el.attr('style');
+            style = csso.minifyBlock(style, {}).css;
+            $el.attr('style', style);
+        });
 
 
         html_code = $.html();
-
-        if(opts.minify) {
-            html_code = htmlmin(html_code, {
-                cssmin: false,
-                jsmin: false,
-                removeComments: true,
-                collapseWhitespace: true
-            });
-        }
-
         return html_code;
     });
 };
