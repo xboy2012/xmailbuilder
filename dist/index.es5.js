@@ -23,10 +23,6 @@ var _htmlmin = require('htmlmin');
 
 var _htmlmin2 = _interopRequireDefault(_htmlmin);
 
-var _probeImageSize = require('probe-image-size');
-
-var _probeImageSize2 = _interopRequireDefault(_probeImageSize);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function pug_attr(t, e, n, f) {
@@ -565,33 +561,14 @@ modules.forEach(function (m) {
     Types[m] = m;
 });
 
-// import size from 'http-image-size';
-//
-// const calculateSize_node = (url) => {
-//     return new Promise((resolve, reject) => {
-//         size(url, (err, dimensions) => {
-//             if(err) {
-//                 reject(err);
-//             } else {
-//                 let {width, height} = dimensions;
-//                 resolve([width, height]);
-//             }
-//         });
-//     });
-// };
-
-var calculateSize_node = function calculateSize_node(url) {
+var calculateSize_browser = function calculateSize_browser(url) {
     return new Promise(function (resolve, reject) {
-        (0, _probeImageSize2.default)(url, function (err, result) {
-            if (err) {
-                reject(err);
-            } else {
-                var width = result.width,
-                    height = result.height;
-
-                resolve([width, height]);
-            }
-        });
+        var img = document.createElement('img');
+        img.onload = function () {
+            resolve([img.width, img.height]);
+        };
+        img.onerror = reject;
+        img.src = url;
     });
 };
 
@@ -603,7 +580,7 @@ var readNode = function readNode(node, promises) {
         var key = 'CACHE_' + url;
         if (!promises.has(key)) {
 
-            var promise = calculateSize_node(url).then(function (_ref) {
+            var promise = calculateSize_browser(url).then(function (_ref) {
                 var _ref2 = _slicedToArray(_ref, 2),
                     width = _ref2[0],
                     height = _ref2[1];

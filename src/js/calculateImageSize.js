@@ -1,34 +1,5 @@
 import Types from './types';
 import config from './_generated/config';
-import prob_image_size from 'probe-image-size';
-
-// import size from 'http-image-size';
-//
-// const calculateSize_node = (url) => {
-//     return new Promise((resolve, reject) => {
-//         size(url, (err, dimensions) => {
-//             if(err) {
-//                 reject(err);
-//             } else {
-//                 let {width, height} = dimensions;
-//                 resolve([width, height]);
-//             }
-//         });
-//     });
-// };
-
-const calculateSize_node = (url) => {
-    return new Promise((resolve, reject) => {
-        prob_image_size(url, (err, result) => {
-            if(err) {
-                reject(err);
-            } else {
-                let {width, height} = result;
-                resolve([width, height]);
-            }
-        });
-    });
-};
 
 const calculateSize_browser = (url) => {
     return new Promise((resolve, reject) => {
@@ -49,7 +20,7 @@ const readNode = (node, promises) => {
         let key = `CACHE_${url}`;
         if(!promises.has(key)) {
 
-            let promise = calculateSize_node(url).then(([width, height]) => {
+            let promise = calculateSize_browser(url).then(([width, height]) => {
                 node.imgWidth = width;
                 node.imgHeight = height;
             });

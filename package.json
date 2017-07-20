@@ -1,6 +1,6 @@
 {
   "name": "xmailbuilder",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "XMailBuilder",
   "main": "dist/index.es5.js",
   "module": "dist/index.es6.js",
@@ -39,7 +39,6 @@
     "cheerio": "^0.22.0",
     "csso": "^3.1.1",
     "htmlmin": "0.0.7",
-    "juice": "^4.1.0",
-    "probe-image-size": "^3.1.0"
+    "juice": "^4.1.0"
   }
 }
