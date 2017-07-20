@@ -50,8 +50,8 @@ const build = (node, opts) => {
 
         if(opts.minify) {
             html_code = htmlmin(html_code, {
-                cssmin: true,
-                jsmin: true,
+                cssmin: false,
+                jsmin: false,
                 removeComments: true,
                 collapseWhitespace: true
             });
