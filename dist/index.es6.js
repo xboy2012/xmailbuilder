@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import juice from 'juice';
+import juice from 'juice/client';
 import csso from 'csso';
 import htmlmin from 'htmlmin';
 import size from 'http-image-size';

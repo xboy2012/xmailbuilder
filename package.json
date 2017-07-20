@@ -1,6 +1,6 @@
 {
   "name": "xmailbuilder",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "XMailBuilder",
   "main": "dist/index.es5.js",
   "module": "dist/index.es6.js",
@@ -21,7 +21,10 @@
     "babel-core": "^6.25.0",
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "babel-preset-es2015": "^6.24.1",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "pug": "^2.0.0-rc.2",
+    "rollup": "^0.45.2",
+    "stylus": "^0.54.5"
   },
   "babel": {
     "presets": [
@@ -37,9 +40,6 @@
     "csso": "^3.1.1",
     "htmlmin": "0.0.7",
     "http-image-size": "^1.1.0",
-    "juice": "^4.1.0",
-    "pug": "^2.0.0-rc.2",
-    "rollup": "^0.45.2",
-    "stylus": "^0.54.5"
+    "juice": "^4.1.0"
   }
 }

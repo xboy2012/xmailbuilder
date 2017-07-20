@@ -84,7 +84,7 @@ const buildJs = () => {
         //plugins: [],
         external: [
             'cheerio',
-            'juice',
+            'juice/client',
             'csso',
             'htmlmin',
             'http-image-size'

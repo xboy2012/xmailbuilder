@@ -9,9 +9,9 @@ var _cheerio = require('cheerio');
 
 var _cheerio2 = _interopRequireDefault(_cheerio);
 
-var _juice = require('juice');
+var _client = require('juice/client');
 
-var _juice2 = _interopRequireDefault(_juice);
+var _client2 = _interopRequireDefault(_client);
 
 var _csso = require('csso');
 
@@ -664,7 +664,7 @@ var build = function build(node, opts) {
             decodeEntities: false,
             recognizeSelfClosing: true
         });
-        _juice2.default.juiceDocument($, {
+        _client2.default.juiceDocument($, {
             extraCss: css_code,
             applyAttributesTableElements: true
         });
