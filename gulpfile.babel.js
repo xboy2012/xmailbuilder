@@ -87,7 +87,7 @@ const buildJs = () => {
             'juice/client',
             'csso',
             'htmlmin',
-            'http-image-size'
+            'probe-image-size'
         ]
     }).then((bundle) => {
         log('generating /dist/index.es6.js');

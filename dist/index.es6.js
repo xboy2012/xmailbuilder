@@ -2,6 +2,7 @@ import cheerio from 'cheerio';
 import juice from 'juice/client';
 import csso from 'csso';
 import htmlmin from 'htmlmin';
+import prob_image_size from 'probe-image-size';
 
 function pug_attr(t,e,n,f){return e!==!1&&null!=e&&(e||"class"!==t&&"style"!==t)?e===!0?" "+(f?t:t+'="'+t+'"'):("function"==typeof e.toJSON&&(e=e.toJSON()),"string"==typeof e||(e=JSON.stringify(e),n||e.indexOf('"')===-1)?(n&&(e=pug_escape(e))," "+t+'="'+e+'"'):" "+t+"='"+e.replace(/'/g,"&#39;")+"'"):""}
 function pug_escape(e){var a=""+e,t=pug_match_html.exec(a);if(!t)return e;var r,c,n,s="";for(r=t.index,c=0;r<a.length;r++){switch(a.charCodeAt(r)){case 34:n="&quot;";break;case 38:n="&amp;";break;case 60:n="&lt;";break;case 62:n="&gt;";break;default:continue}c!==r&&(s+=a.substring(c,r)),c=r+1,s+=n;}return c!==r?s+a.substring(c,r):s}
@@ -578,14 +579,16 @@ modules.forEach((m) => {Types[m] = m;});
 //     });
 // };
 
-const calculateSize_browser = (url) => {
+const calculateSize_node = (url) => {
     return new Promise((resolve, reject) => {
-        let img = document.createElement('img');
-        img.onload = () => {
-            resolve([img.width, img.height]);
-        };
-        img.onerror = reject;
-        img.src = url;
+        prob_image_size(url, (err, result) => {
+            if(err) {
+                reject(err);
+            } else {
+                let {width, height} = result;
+                resolve([width, height]);
+            }
+        });
     });
 };
 
@@ -597,7 +600,7 @@ const readNode = (node, promises) => {
         let key = `CACHE_${url}`;
         if(!promises.has(key)) {
 
-            let promise = calculateSize_browser(url).then(([width, height]) => {
+            let promise = calculateSize_node(url).then(([width, height]) => {
                 node.imgWidth = width;
                 node.imgHeight = height;
             });
