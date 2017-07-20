@@ -10,12 +10,18 @@ import Types from './src/js/types';
 import readFile from './tasks/core/readFile';
 import writeFile from './tasks/core/writeFile';
 
+const log = (...args) => {
+    console.log(...args);
+};
+
 const makeHint = () => {
     let code = `export default ${JSON.stringify(Types)};`;
+    log('building /src/js/_generated/types.hint.js');
     return writeFile(`${ROOT_DIR}/src/js/_generated/types.hint.js`, code);
 };
 
 const makeCss = () => {
+    log('compiling /src/stylus/common.styl');
     return readFile(`${ROOT_DIR}/src/stylus/common.styl`).then((code) => {
         return new Promise((resolve, reject) => {
             stylus(code).render((err, css) => {
@@ -23,6 +29,7 @@ const makeCss = () => {
             });
         });
     }).then((css) => {
+        log('generating /src/js/_generated/css.js');
         css = csso.minify(css).css;
         let code = `export default ${JSON.stringify(css)};`;
         return writeFile(`${ROOT_DIR}/src/js/_generated/css.js`, code);
@@ -30,6 +37,7 @@ const makeCss = () => {
 };
 
 const makeXTmpl = () => {
+    log('building /module_layout/*.pugs');
     let promises = modules.map((m) => readFile(`${ROOT_DIR}/src/module_layout/mixins/${m}.pug`));
     promises.unshift(readFile(`${ROOT_DIR}/src/module_layout/utils.pug`));
 
@@ -45,26 +53,32 @@ const makeXTmpl = () => {
             '+createPartialPug(node, null)'
         ].join('\r\n');
 
+        log('compiling /module_layout/mixins/*.pugs');
         code = pug.compileClient(code, {
             name: 'xtmpl',
             compileDebug: false,
         });
         code += ';\r\nexport default xtmpl;';
 
+        log('generating /src/js/_generated/xtmpl.js');
         return writeFile(`${ROOT_DIR}/src/js/_generated/xtmpl.js`, code);
     });
 };
 
 const makeConfig = () => {
+    log('generating /src/js/_generated/config.js');
     let code = [
         ...modules.map((m) => `import ${m} from '../config/${m}';`),
-        `export default {${modules.join(',')}};`
+        'export default {',
+        modules.map((m) => `${JSON.stringify(Types[m])}: ${m}`).join(',\r\n'),
+        '};'
     ].join('\r\n');
 
     return writeFile(`${ROOT_DIR}/src/js/_generated/config.js`, code);
 };
 
 const buildJs = () => {
+    log('building /src/js/*.js');
     return rollup({
         entry: `${ROOT_DIR}/src/js/index.js`,
         //plugins: [],
@@ -76,7 +90,8 @@ const buildJs = () => {
             'http-image-size'
         ]
     }).then((bundle) => {
-        bundle.write({
+        log('generating /dist/index.es6.js');
+        return bundle.write({
             format: "es",      // output format - 'amd', 'cjs', 'es6', 'iife', 'umd'
             useStrict: false,   //去除严格模式，减少无用字符，同时增加代码兼容性
             dest: `${ROOT_DIR}/dist/index.es6.js`
@@ -85,24 +100,24 @@ const buildJs = () => {
 };
 
 const babelJs = () => {
+    log('transpiling /dist/index.es6.js');
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            babel.transformFile(`${ROOT_DIR}/dist/index.es6.js`, {
-                //ast: false
-                // babelrc: false,
-                // presets: ["es2015"],
-                // plugins: [
-                //     "transform-remove-strict-mode"
-                // ]
-            }, (err, result) => {
-                if(err) {
-                    reject(err);
-                } else {
-                    resolve(result.code);
-                }
-            });
-        }, 0);
+        babel.transformFile(`${ROOT_DIR}/dist/index.es6.js`, {
+            //ast: false
+            // babelrc: false,
+            // presets: ["es2015"],
+            // plugins: [
+            //     "transform-remove-strict-mode"
+            // ]
+        }, (err, result) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(result.code);
+            }
+        });
     }).then((code) => {
+        log('generating /dist/index.es5.js');
         return writeFile(`${ROOT_DIR}/dist/index.es5.js`, code)
     });
 };

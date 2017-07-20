@@ -2,7 +2,7 @@ function pug_attr(t,e,n,f){return e!==!1&&null!=e&&(e||"class"!==t&&"style"!==t)
 function pug_escape(e){var a=""+e,t=pug_match_html.exec(a);if(!t)return e;var r,c,n,s="";for(r=t.index,c=0;r<a.length;r++){switch(a.charCodeAt(r)){case 34:n="&quot;";break;case 38:n="&amp;";break;case 60:n="&lt;";break;case 62:n="&gt;";break;default:continue}c!==r&&(s+=a.substring(c,r)),c=r+1,s+=n}return c!==r?s+a.substring(c,r):s}
 var pug_has_own_property=Object.prototype.hasOwnProperty;
 var pug_match_html=/["&<>]/;
-function pug_style(r){if(!r)return"";if("object"==typeof r){var t="";for(var e in r)pug_has_own_property.call(r,e)&&(t=t+e+":"+r[e]+";");return t}return r+="",";"!==r[r.length-1]?r+";":r}function xtmpl(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (node) {var Types = {"MAIN":"MAIN","IMG_CONTENT":"IMG_CONTENT","TITLE_CONTENT":"TITLE_CONTENT","BOTTOM_QR":"BOTTOM_QR","SIGNATURE":"SIGNATURE","IMG":"IMG","IMG_LINK":"IMG_LINK","CONTAINER":"CONTAINER","CONTAINER_DOUBLE":"CONTAINER_DOUBLE","TEXT":"TEXT","HTML":"HTML","BLANK":"BLANK","LIST":"LIST","LIST_ITEM":"LIST_ITEM"};
+function pug_style(r){if(!r)return"";if("object"==typeof r){var t="";for(var e in r)pug_has_own_property.call(r,e)&&(t=t+e+":"+r[e]+";");return t}return r+="",";"!==r[r.length-1]?r+";":r}function xtmpl(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (node) {var Types = {"MAIN":"MAIN","IMG_CONTENT":"IMG_CONTENT","TITLE_CONTENT":"TITLE_CONTENT","BOTTOM_QR":"BOTTOM_QR","SIGNATURE":"SIGNATURE","IMG":"IMG","IMG_LINK":"IMG_LINK","CONTAINER":"CONTAINER","TEXT":"TEXT","HTML":"HTML","BLANK":"BLANK","LIST":"LIST","LIST_ITEM":"LIST_ITEM"};
 var parseStyle = function(css) {
     var rules = [];
     for(var key in css) {
@@ -212,61 +212,6 @@ pug_mixins["createPartialPug"](childNode, node);
 
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["CONTAINER_DOUBLE"] = pug_interp = function(node, parentNode){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-var bgColor = node.bgColor;
-var leftWidth = node.leftWidth;
-var rightWidth = node.rightWidth;
-var childNodesLeft = node.childNodesLeft;
-var childNodesRight = node.childNodesRight;
-
-pug_html = pug_html + "\u003Ctable" + (" width=\"100%\""+pug_attr("bgcolor", (bgColor || false), true, false)+pug_attr("style", pug_style(parseStyle({
-            'width': '100%',
-            'background-color': bgColor
-        })), true, false)) + "\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Ctd" + (pug_attr("width", (leftWidth || false), true, false)+pug_attr("style", pug_style(parseStyle({
-                        'width': leftWidth
-                    })), true, false)) + "\u003E";
-// iterate childNodesLeft
-;(function(){
-  var $$obj = childNodesLeft;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
-        var childNode = $$obj[pug_index4];
-pug_mixins["createPartialPug"](childNode, node);
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index4 in $$obj) {
-      $$l++;
-      var childNode = $$obj[pug_index4];
-pug_mixins["createPartialPug"](childNode, node);
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\u003C\u002Ftd\u003E\u003Ctd" + (pug_attr("width", (rightWidth || false), true, false)+pug_attr("style", pug_style(parseStyle({
-                        'width': rightWidth
-                    })), true, false)) + "\u003E";
-// iterate childNodesRight
-;(function(){
-  var $$obj = childNodesRight;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
-        var childNode = $$obj[pug_index5];
-pug_mixins["createPartialPug"](childNode, node);
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index5 in $$obj) {
-      $$l++;
-      var childNode = $$obj[pug_index5];
-pug_mixins["createPartialPug"](childNode, node);
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E\u003C\u002Ftbody\u003E\u003C\u002Ftable\u003E";
-};
 pug_mixins["TEXT"] = pug_interp = function(node, parentNode){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 var text = node.text;
@@ -323,15 +268,15 @@ pug_html = pug_html + "\u003Cul" + (pug_attr("style", pug_style(parseStyle({
 ;(function(){
   var $$obj = childNodes;
   if ('number' == typeof $$obj.length) {
-      for (var pug_index6 = 0, $$l = $$obj.length; pug_index6 < $$l; pug_index6++) {
-        var childNode = $$obj[pug_index6];
+      for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
+        var childNode = $$obj[pug_index4];
 pug_mixins["createPartialPug"](childNode, node);
       }
   } else {
     var $$l = 0;
-    for (var pug_index6 in $$obj) {
+    for (var pug_index4 in $$obj) {
       $$l++;
-      var childNode = $$obj[pug_index6];
+      var childNode = $$obj[pug_index4];
 pug_mixins["createPartialPug"](childNode, node);
     }
   }
@@ -348,8 +293,8 @@ pug_html = pug_html + "\u003Cli\u003E";
 ;(function(){
   var $$obj = childNodes;
   if ('number' == typeof $$obj.length) {
-      for (var pug_index7 = 0, $$l = $$obj.length; pug_index7 < $$l; pug_index7++) {
-        var childNode = $$obj[pug_index7];
+      for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
+        var childNode = $$obj[pug_index5];
 pug_html = pug_html + "\u003Cspan" + (pug_attr("style", pug_style(parseStyle({
                     'color': fontColor
                 })), true, false)) + "\u003E";
@@ -358,9 +303,9 @@ pug_html = pug_html + "\u003C\u002Fspan\u003E";
       }
   } else {
     var $$l = 0;
-    for (var pug_index7 in $$obj) {
+    for (var pug_index5 in $$obj) {
       $$l++;
-      var childNode = $$obj[pug_index7];
+      var childNode = $$obj[pug_index5];
 pug_html = pug_html + "\u003Cspan" + (pug_attr("style", pug_style(parseStyle({
                     'color': fontColor
                 })), true, false)) + "\u003E";
@@ -405,10 +350,6 @@ pug_mixins["IMG_LINK"](node, parentNode);
 else
 if (type === Types.CONTAINER) {
 pug_mixins["CONTAINER"](node, parentNode);
-}
-else
-if (type === Types.CONTAINER_DOUBLE) {
-pug_mixins["CONTAINER_DOUBLE"](node, parentNode);
 }
 else
 if (type === Types.TEXT) {

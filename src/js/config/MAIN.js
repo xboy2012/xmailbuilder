@@ -1,6 +1,6 @@
 export default {
     properties: [
-        {name: 'bgColor', type: 'string'},
-        {name: 'childNodes', type: 'nodes'}
-    ]
+        {name: 'bgColor', type: 'string'}
+    ],
+    isContainer: true
 };

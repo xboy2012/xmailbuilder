@@ -7,13 +7,18 @@ const formatNode = (node) => {
     let newNode = {};
     newNode.type = nodeType;
 
-    for(let {name, type, defaultValue} of cfgNode.properties) {
-        if(type === 'nodes') {
-            newNode[name] = node.hasOwnProperty(name) ? node[name].map((o) => formatNode(o)) : [];
-        } else {
-            newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
-        }
+    for(let {name, defaultValue} of cfgNode.properties) {
+        newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
     }
+
+    if(cfgNode.isContainer) {
+        newNode.childNodes = (node.childNodes || []).map((o) => {
+            o = formatNode(o);
+            o.parentNode = newNode;
+            return o;
+        });
+    }
+
     return newNode;
 };
 

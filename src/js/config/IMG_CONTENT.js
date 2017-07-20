@@ -9,7 +9,7 @@ export default {
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '0'},
-        {name: 'childNodes', type: 'nodes'}
-    ]
+        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
+    ],
+    isContainer: true
 };

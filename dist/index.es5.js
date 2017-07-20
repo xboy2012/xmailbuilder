@@ -56,7 +56,7 @@ function pug_style(r) {
     var pug_html = "",
         pug_mixins = {},
         _pug_interp4;var locals_for_with = locals || {};(function (node) {
-        var Types = { "MAIN": "MAIN", "IMG_CONTENT": "IMG_CONTENT", "TITLE_CONTENT": "TITLE_CONTENT", "BOTTOM_QR": "BOTTOM_QR", "SIGNATURE": "SIGNATURE", "IMG": "IMG", "IMG_LINK": "IMG_LINK", "CONTAINER": "CONTAINER", "CONTAINER_DOUBLE": "CONTAINER_DOUBLE", "TEXT": "TEXT", "HTML": "HTML", "BLANK": "BLANK", "LIST": "LIST", "LIST_ITEM": "LIST_ITEM" };
+        var Types = { "MAIN": "MAIN", "IMG_CONTENT": "IMG_CONTENT", "TITLE_CONTENT": "TITLE_CONTENT", "BOTTOM_QR": "BOTTOM_QR", "SIGNATURE": "SIGNATURE", "IMG": "IMG", "IMG_LINK": "IMG_LINK", "CONTAINER": "CONTAINER", "TEXT": "TEXT", "HTML": "HTML", "BLANK": "BLANK", "LIST": "LIST", "LIST_ITEM": "LIST_ITEM" };
         var parseStyle = function parseStyle(css) {
             var rules = [];
             for (var key in css) {
@@ -270,62 +270,6 @@ function pug_style(r) {
 
             pug_html = pug_html + '</div>';
         };
-        pug_mixins["CONTAINER_DOUBLE"] = _pug_interp4 = function _pug_interp2(node, parentNode) {
-            var block = this && this.block,
-                attributes = this && this.attributes || {};
-            var bgColor = node.bgColor;
-            var leftWidth = node.leftWidth;
-            var rightWidth = node.rightWidth;
-            var childNodesLeft = node.childNodesLeft;
-            var childNodesRight = node.childNodesRight;
-
-            pug_html = pug_html + '<table' + (" width=\"100%\"" + pug_attr("bgcolor", bgColor || false, true, false) + pug_attr("style", pug_style(parseStyle({
-                'width': '100%',
-                'background-color': bgColor
-            })), true, false)) + '><tbody><tr><td' + (pug_attr("width", leftWidth || false, true, false) + pug_attr("style", pug_style(parseStyle({
-                'width': leftWidth
-            })), true, false)) + '>';
-            // iterate childNodesLeft
-            (function () {
-                var $$obj = childNodesLeft;
-                if ('number' == typeof $$obj.length) {
-                    for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
-                        var childNode = $$obj[pug_index4];
-                        pug_mixins["createPartialPug"](childNode, node);
-                    }
-                } else {
-                    var $$l = 0;
-                    for (var pug_index4 in $$obj) {
-                        $$l++;
-                        var childNode = $$obj[pug_index4];
-                        pug_mixins["createPartialPug"](childNode, node);
-                    }
-                }
-            }).call(this);
-
-            pug_html = pug_html + '</td><td' + (pug_attr("width", rightWidth || false, true, false) + pug_attr("style", pug_style(parseStyle({
-                'width': rightWidth
-            })), true, false)) + '>';
-            // iterate childNodesRight
-            (function () {
-                var $$obj = childNodesRight;
-                if ('number' == typeof $$obj.length) {
-                    for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
-                        var childNode = $$obj[pug_index5];
-                        pug_mixins["createPartialPug"](childNode, node);
-                    }
-                } else {
-                    var $$l = 0;
-                    for (var pug_index5 in $$obj) {
-                        $$l++;
-                        var childNode = $$obj[pug_index5];
-                        pug_mixins["createPartialPug"](childNode, node);
-                    }
-                }
-            }).call(this);
-
-            pug_html = pug_html + '</td></tr></tbody></table>';
-        };
         pug_mixins["TEXT"] = _pug_interp4 = function _pug_interp2(node, parentNode) {
             var block = this && this.block,
                 attributes = this && this.attributes || {};
@@ -385,15 +329,15 @@ function pug_style(r) {
             (function () {
                 var $$obj = childNodes;
                 if ('number' == typeof $$obj.length) {
-                    for (var pug_index6 = 0, $$l = $$obj.length; pug_index6 < $$l; pug_index6++) {
-                        var childNode = $$obj[pug_index6];
+                    for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
+                        var childNode = $$obj[pug_index4];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 } else {
                     var $$l = 0;
-                    for (var pug_index6 in $$obj) {
+                    for (var pug_index4 in $$obj) {
                         $$l++;
-                        var childNode = $$obj[pug_index6];
+                        var childNode = $$obj[pug_index4];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 }
@@ -411,8 +355,8 @@ function pug_style(r) {
             (function () {
                 var $$obj = childNodes;
                 if ('number' == typeof $$obj.length) {
-                    for (var pug_index7 = 0, $$l = $$obj.length; pug_index7 < $$l; pug_index7++) {
-                        var childNode = $$obj[pug_index7];
+                    for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
+                        var childNode = $$obj[pug_index5];
                         pug_html = pug_html + '<span' + pug_attr("style", pug_style(parseStyle({
                             'color': fontColor
                         })), true, false) + '>';
@@ -421,9 +365,9 @@ function pug_style(r) {
                     }
                 } else {
                     var $$l = 0;
-                    for (var pug_index7 in $$obj) {
+                    for (var pug_index5 in $$obj) {
                         $$l++;
-                        var childNode = $$obj[pug_index7];
+                        var childNode = $$obj[pug_index5];
                         pug_html = pug_html + '<span' + pug_attr("style", pug_style(parseStyle({
                             'color': fontColor
                         })), true, false) + '>';
@@ -455,8 +399,6 @@ function pug_style(r) {
                 pug_mixins["IMG_LINK"](node, parentNode);
             } else if (type === Types.CONTAINER) {
                 pug_mixins["CONTAINER"](node, parentNode);
-            } else if (type === Types.CONTAINER_DOUBLE) {
-                pug_mixins["CONTAINER_DOUBLE"](node, parentNode);
             } else if (type === Types.TEXT) {
                 pug_mixins["TEXT"](node, parentNode);
             } else if (type === Types.HTML) {
@@ -476,62 +418,85 @@ function pug_style(r) {
 var css_code = "::-webkit-scrollbar{display:none}a{text-decoration:none}a:not(.nolink){color:#0067ed;cursor:pointer}.main,body,p{margin:0;padding:0}img{display:inline-block;border:0}table{border-collapse:collapse;border:0}.main{font-family:Helvetica,\"Helvetica Neue\",\"Helvetica Neue Light\",HelveticaNeue-Light,'微软雅黑','Microsoft Yahei',Calibri,Arial,sans-serif;padding:40px}.main>table,.section,img{margin:auto}.section{background-color:#fff;border-radius:10px;overflow:hidden;width:640px}.section.title>tbody>tr>th{padding:32px 40px 0;font-weight:400}.section.title>tbody>tr>th>p{text-align:center;font-size:26px;margin:0}.section.title>tbody>tr>th>p>span{padding:0 15px}";
 
 var MAIN = {
-    properties: [{ name: 'bgColor', type: 'string' }, { name: 'childNodes', type: 'nodes' }]
+    properties: [{ name: 'bgColor', type: 'string' }],
+    isContainer: true
 };
 
 var IMG_CONTENT = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'childNodes', type: 'nodes' }]
+    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: true
 };
 
 var TITLE_CONTENT = {
-    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'childNodes', type: 'nodes' }]
+    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: true
 };
 
 var BOTTOM_QR = {
-    properties: []
+    properties: [],
+    isContainer: false
 };
 
 var SIGNATURE = {
-    properties: [{ name: 'date', type: 'string' }]
+    properties: [{ name: 'date', type: 'string' }],
+    isContainer: false
 };
 
 var IMG = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }]
+    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }],
+    isContainer: false
 };
 
 var IMG_LINK = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'url', type: 'string' }]
+    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'url', type: 'string' }],
+    isContainer: false
 };
 
 var CONTAINER = {
-    properties: [{ name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'childNodes', type: 'nodes' }]
-};
-
-var CONTAINER_DOUBLE = {
-    properties: [{ name: 'bgColor', type: 'string' }, { name: 'leftWidth', type: 'string' }, { name: 'rightWidth', type: 'string' }, { name: 'childNodesLeft', type: 'nodes' }, { name: 'childNodesRight', type: 'nodes' }]
+    properties: [{ name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: true
 };
 
 var TEXT = {
-    properties: [{ name: 'text', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }]
+    properties: [{ name: 'text', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: false
 };
 
 var HTML = {
-    properties: [{ name: 'html', type: 'string', defaultValue: '' }]
+    properties: [{ name: 'html', type: 'string', defaultValue: '' }],
+    isContainer: false
 };
 
 var BLANK = {
-    properties: [{ name: 'height', type: 'string', defaultValue: '0' }]
+    properties: [{ name: 'height', type: 'string', defaultValue: '0' }],
+    isContainer: false
 };
 
 var LIST = {
-    properties: [{ name: 'bulletColor', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'childNodes', type: 'nodes' }]
+    properties: [{ name: 'bulletColor', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: true
 };
 
 var LIST_ITEM = {
-    properties: [{ name: 'fontColor', type: 'string' }, { name: 'childNodes', type: 'nodes' }]
+    properties: [{ name: 'fontColor', type: 'string' }],
+    isContainer: true
 };
 
-var config = { MAIN: MAIN, IMG_CONTENT: IMG_CONTENT, TITLE_CONTENT: TITLE_CONTENT, BOTTOM_QR: BOTTOM_QR, SIGNATURE: SIGNATURE, IMG: IMG, IMG_LINK: IMG_LINK, CONTAINER: CONTAINER, CONTAINER_DOUBLE: CONTAINER_DOUBLE, TEXT: TEXT, HTML: HTML, BLANK: BLANK, LIST: LIST, LIST_ITEM: LIST_ITEM };
+var config = {
+    "MAIN": MAIN,
+    "IMG_CONTENT": IMG_CONTENT,
+    "TITLE_CONTENT": TITLE_CONTENT,
+    "BOTTOM_QR": BOTTOM_QR,
+    "SIGNATURE": SIGNATURE,
+    "IMG": IMG,
+    "IMG_LINK": IMG_LINK,
+    "CONTAINER": CONTAINER,
+    "TEXT": TEXT,
+    "HTML": HTML,
+    "BLANK": BLANK,
+    "LIST": LIST,
+    "LIST_ITEM": LIST_ITEM
+};
 
 //格式化节点，添加默认值
 var formatNode = function formatNode(node) {
@@ -548,16 +513,9 @@ var formatNode = function formatNode(node) {
         for (var _iterator = cfgNode.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var _step$value = _step.value,
                 name = _step$value.name,
-                type = _step$value.type,
                 defaultValue = _step$value.defaultValue;
 
-            if (type === 'nodes') {
-                newNode[name] = node.hasOwnProperty(name) ? node[name].map(function (o) {
-                    return formatNode(o);
-                }) : [];
-            } else {
-                newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
-            }
+            newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
         }
     } catch (err) {
         _didIteratorError = true;
@@ -574,6 +532,14 @@ var formatNode = function formatNode(node) {
         }
     }
 
+    if (cfgNode.isContainer) {
+        newNode.childNodes = (node.childNodes || []).map(function (o) {
+            o = formatNode(o);
+            o.parentNode = newNode;
+            return o;
+        });
+    }
+
     return newNode;
 };
 
@@ -585,7 +551,6 @@ var modules = ['MAIN', //主框架，邮件最顶层结构有且只有一个主�
 'IMG', //但图片组件
 'IMG_LINK', //图片超链接组件
 'CONTAINER', //容器组件，用于布局结构占位
-'CONTAINER_DOUBLE', //水平二等分容器组件
 'TEXT', //文字组件
 'HTML', //富文本HTML组件（开发中）
 'BLANK', //空白，用于实现段落间隔

@@ -8,5 +8,6 @@ export default {
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
         {name: 'paddingBottom', type: 'string', defaultValue: '0'}
-    ]
+    ],
+    isContainer: false
 };

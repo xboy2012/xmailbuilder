@@ -1,6 +1,6 @@
 {
   "name": "xmailbuilder",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "XMailBuilder",
   "main": "dist/index.es5.js",
   "module": "dist/index.es6.js",

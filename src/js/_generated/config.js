@@ -6,10 +6,23 @@ import SIGNATURE from '../config/SIGNATURE';
 import IMG from '../config/IMG';
 import IMG_LINK from '../config/IMG_LINK';
 import CONTAINER from '../config/CONTAINER';
-import CONTAINER_DOUBLE from '../config/CONTAINER_DOUBLE';
 import TEXT from '../config/TEXT';
 import HTML from '../config/HTML';
 import BLANK from '../config/BLANK';
 import LIST from '../config/LIST';
 import LIST_ITEM from '../config/LIST_ITEM';
-export default {MAIN,IMG_CONTENT,TITLE_CONTENT,BOTTOM_QR,SIGNATURE,IMG,IMG_LINK,CONTAINER,CONTAINER_DOUBLE,TEXT,HTML,BLANK,LIST,LIST_ITEM};
+export default {
+"MAIN": MAIN,
+"IMG_CONTENT": IMG_CONTENT,
+"TITLE_CONTENT": TITLE_CONTENT,
+"BOTTOM_QR": BOTTOM_QR,
+"SIGNATURE": SIGNATURE,
+"IMG": IMG,
+"IMG_LINK": IMG_LINK,
+"CONTAINER": CONTAINER,
+"TEXT": TEXT,
+"HTML": HTML,
+"BLANK": BLANK,
+"LIST": LIST,
+"LIST_ITEM": LIST_ITEM
+};
