@@ -1,6 +1,30 @@
 import Types from './types';
 import config from './_generated/config';
-import size from 'http-image-size';
+// import size from 'http-image-size';
+//
+// const calculateSize_node = (url) => {
+//     return new Promise((resolve, reject) => {
+//         size(url, (err, dimensions) => {
+//             if(err) {
+//                 reject(err);
+//             } else {
+//                 let {width, height} = dimensions;
+//                 resolve([width, height]);
+//             }
+//         });
+//     });
+// };
+
+const calculateSize_browser = (url) => {
+    return new Promise((resolve, reject) => {
+        let img = document.createElement('img');
+        img.onload = () => {
+            resolve([img.width, img.height]);
+        };
+        img.onerror = reject;
+        img.src = url;
+    });
+};
 
 const readNode = (node, promises) => {
     let nodeType = node.type;
@@ -9,17 +33,10 @@ const readNode = (node, promises) => {
         let url = node.src;
         let key = `CACHE_${url}`;
         if(!promises.has(key)) {
-            let promise = new Promise((resolve, reject) => {
-                size(url, (err, dimensions) => {
-                    if(err) {
-                        reject(err);
-                    } else {
-                        let {width, height} = dimensions;
-                        node.imgWidth = width;
-                        node.imgHeight = height;
-                        resolve();
-                    }
-                });
+
+            let promise = calculateSize_browser(url).then(([width, height]) => {
+                node.imgWidth = width;
+                node.imgHeight = height;
             });
             promises.set(key, promise);
         }

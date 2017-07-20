@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.build = exports.Types = exports.config = undefined;
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _cheerio = require('cheerio');
@@ -20,10 +22,6 @@ var _csso2 = _interopRequireDefault(_csso);
 var _htmlmin = require('htmlmin');
 
 var _htmlmin2 = _interopRequireDefault(_htmlmin);
-
-var _httpImageSize = require('http-image-size');
-
-var _httpImageSize2 = _interopRequireDefault(_httpImageSize);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -563,6 +561,32 @@ modules.forEach(function (m) {
     Types[m] = m;
 });
 
+// import size from 'http-image-size';
+//
+// const calculateSize_node = (url) => {
+//     return new Promise((resolve, reject) => {
+//         size(url, (err, dimensions) => {
+//             if(err) {
+//                 reject(err);
+//             } else {
+//                 let {width, height} = dimensions;
+//                 resolve([width, height]);
+//             }
+//         });
+//     });
+// };
+
+var calculateSize_browser = function calculateSize_browser(url) {
+    return new Promise(function (resolve, reject) {
+        var img = document.createElement('img');
+        img.onload = function () {
+            resolve([img.width, img.height]);
+        };
+        img.onerror = reject;
+        img.src = url;
+    });
+};
+
 var readNode = function readNode(node, promises) {
     var nodeType = node.type;
 
@@ -570,19 +594,14 @@ var readNode = function readNode(node, promises) {
         var url = node.src;
         var key = 'CACHE_' + url;
         if (!promises.has(key)) {
-            var promise = new Promise(function (resolve, reject) {
-                (0, _httpImageSize2.default)(url, function (err, dimensions) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        var width = dimensions.width,
-                            height = dimensions.height;
 
-                        node.imgWidth = width;
-                        node.imgHeight = height;
-                        resolve();
-                    }
-                });
+            var promise = calculateSize_browser(url).then(function (_ref) {
+                var _ref2 = _slicedToArray(_ref, 2),
+                    width = _ref2[0],
+                    height = _ref2[1];
+
+                node.imgWidth = width;
+                node.imgHeight = height;
             });
             promises.set(key, promise);
         }
