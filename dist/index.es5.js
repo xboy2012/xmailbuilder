@@ -1,7 +1,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.buildHtmlFromNode = exports.serializeNodeToJSON = exports.parseNodeFromJSON = exports.Types = exports.config = undefined;
+exports.insertAfter = exports.insertBefore = exports.appendChild = exports.removeNode = exports.createNode = exports.buildHtmlFromNode = exports.serializeNodeToJSON = exports.parseNodeFromJSON = exports.Types = exports.config = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -100,64 +100,59 @@ var config = {
     "LIST_ITEM": LIST_ITEM
 };
 
+var ct = 0;
+var getNewId = function getNewId() {
+    ct++;
+    return ct;
+};
+
+//格式化节点，添加默认值
 var parseNodeFromJSON = function parseNodeFromJSON(json) {
+    var nodeType = json.type;
+    var cfgNode = config[nodeType];
+    var node = {};
+    node.type = nodeType;
+    node.id = getNewId();
 
-    var ct = 0;
-    var getNewId = function getNewId() {
-        ct++;
-        return ct;
-    };
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
-    //格式化节点，添加默认值
-    var formatNode = function formatNode(json) {
-        var nodeType = json.type;
-        var cfgNode = config[nodeType];
-        var node = {};
-        node.type = nodeType;
-        node.id = getNewId();
+    try {
+        for (var _iterator = cfgNode.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var _step$value = _step.value,
+                name = _step$value.name,
+                defaultValue = _step$value.defaultValue;
 
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
+            node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
         try {
-            for (var _iterator = cfgNode.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var _step$value = _step.value,
-                    name = _step$value.name,
-                    defaultValue = _step$value.defaultValue;
-
-                node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
             }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
         } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
+            if (_didIteratorError) {
+                throw _iteratorError;
             }
         }
+    }
 
-        if (cfgNode.isContainer) {
-            node.childNodes = (json.childNodes || []).map(function (o) {
-                o = formatNode(o);
-                o.parentId = node.id; //父节点ID
-                o.getParentNode = function () {
-                    return node;
-                }; //父节点信息
-                return o;
-            });
-        }
+    if (cfgNode.isContainer) {
+        node.childNodes = (json.childNodes || []).map(function (o) {
+            o = parseNodeFromJSON(o);
+            o.parentId = node.id; //父节点ID
+            o.getParentNode = function () {
+                return node;
+            }; //父节点信息
+            return o;
+        });
+    }
 
-        return node;
-    };
-
-    return formatNode(json);
+    return node;
 };
 
 /**
@@ -625,6 +620,102 @@ var buildHtmlFromNode = function buildHtmlFromNode(node) {
     return html_code;
 };
 
+var createNode = function createNode(nodeType) {
+    var _config$nodeType = config[nodeType],
+        properties = _config$nodeType.properties,
+        isContainer = _config$nodeType.isContainer;
+
+    var json = {};
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+        for (var _iterator3 = properties[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var _step3$value = _step3.value,
+                name = _step3$value.name,
+                defaultValue = _step3$value.defaultValue;
+
+            if (defaultValue !== undefined) {
+                json[name] = defaultValue;
+            }
+        }
+    } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+            }
+        } finally {
+            if (_didIteratorError3) {
+                throw _iteratorError3;
+            }
+        }
+    }
+
+    if (isContainer) {
+        json.childNodes = [];
+    }
+    return parseNodeFromJSON(json);
+};
+
+var appendChild = function appendChild(parentNode, childNode) {
+    //不是容器，不能插入子元素
+    if (!config[parentNode.type].isContainer) {
+        throw Error('Cannot appendChild in a non-container element');
+    }
+    //如果已经在树中，先移除
+    removeNode(childNode);
+    //插入新树
+    parentNode.childNodes.push(childNode);
+    childNode.parentId = parentNode.id;
+    childNode.getParentNode = function () {
+        return parentNode;
+    };
+};
+
+var removeNode = function removeNode(childNode) {
+    if (childNode.parentId) {
+        var parentNode = childNode.getParentNode();
+        var index = parentNode.childNodes.indexOf(childNode);
+        parentNode.childNodes.splice(index, 1);
+        childNode.parentId = 0;
+        childNode.getParentNode = function () {
+            return null;
+        };
+    }
+};
+
+var insertBefore = function insertBefore(baseNode, childNode) {
+    if (!baseNode.parentId) {
+        throw Error('Cannot insertBefore an element without parent');
+    }
+    removeNode(childNode);
+    var parentNode = baseNode.getParentNode();
+    var index = parentNode.childNodes.indexOf(baseNode);
+    parentNode.childNodes.splice(index, 0, childNode);
+    childNode.parentId = parentNode.id;
+    childNode.getParentNode = function () {
+        return parentNode;
+    };
+};
+
+var insertAfter = function insertAfter(baseNode, childNode) {
+    if (!baseNode.parentId) {
+        throw Error('Cannot insertBefore an element without parent');
+    }
+    removeNode(childNode);
+    var parentNode = baseNode.getParentNode();
+    var index = parentNode.childNodes.indexOf(baseNode);
+    parentNode.childNodes.splice(index + 1, 0, childNode);
+    childNode.parentId = parentNode.id;
+    childNode.getParentNode = function () {
+        return parentNode;
+    };
+};
+
 var modules = ['MAIN', //主框架，邮件最顶层结构有且只有一个主框架
 'IMG_CONTENT', //图片标题栏，下侧正文
 'TITLE_CONTENT', //文字标题栏，下侧正文
@@ -650,3 +741,8 @@ exports.Types = Types;
 exports.parseNodeFromJSON = parseNodeFromJSON;
 exports.serializeNodeToJSON = serializeNode;
 exports.buildHtmlFromNode = buildHtmlFromNode;
+exports.createNode = createNode;
+exports.removeNode = removeNode;
+exports.appendChild = appendChild;
+exports.insertBefore = insertBefore;
+exports.insertAfter = insertAfter;

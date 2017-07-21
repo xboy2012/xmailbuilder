@@ -149,40 +149,34 @@ var config = {
 "LIST_ITEM": LIST_ITEM
 };
 
-var parseNodeFromJSON = (json) => {
+let ct = 0;
+const getNewId = () => {
+    ct++;
+    return ct;
+};
 
-    let ct = 0;
-    const getNewId = () => {
-        ct++;
-        return ct;
-    };
+//格式化节点，添加默认值
+const parseNodeFromJSON = (json) => {
+    let nodeType = json.type;
+    let cfgNode = config[nodeType];
+    let node = {};
+    node.type = nodeType;
+    node.id = getNewId();
 
-    //格式化节点，添加默认值
-    const formatNode = (json) => {
-        let nodeType = json.type;
-        let cfgNode = config[nodeType];
-        let node = {};
-        node.type = nodeType;
-        node.id = getNewId();
+    for(let {name, defaultValue} of cfgNode.properties) {
+        node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
+    }
 
-        for(let {name, defaultValue} of cfgNode.properties) {
-            node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
-        }
+    if(cfgNode.isContainer) {
+        node.childNodes = (json.childNodes || []).map((o) => {
+            o = parseNodeFromJSON(o);
+            o.parentId = node.id;            //父节点ID
+            o.getParentNode = () => node;    //父节点信息
+            return o;
+        });
+    }
 
-        if(cfgNode.isContainer) {
-            node.childNodes = (json.childNodes || []).map((o) => {
-                o = formatNode(o);
-                o.parentId = node.id;            //父节点ID
-                o.getParentNode = () => node;    //父节点信息
-                return o;
-            });
-        }
-
-        return node;
-    };
-
-
-    return formatNode(json);
+    return node;
 };
 
 /**
@@ -614,6 +608,67 @@ var buildHtmlFromNode = (node) => {
     return html_code;
 };
 
+const createNode = (nodeType) => {
+    let {properties, isContainer} = config[nodeType];
+    let json = {};
+    for(let {name, defaultValue} of properties) {
+        if(defaultValue !== undefined) {
+            json[name] = defaultValue;
+        }
+    }
+    if(isContainer) {
+        json.childNodes = [];
+    }
+    return parseNodeFromJSON(json);
+};
+
+const appendChild = (parentNode, childNode) => {
+    //不是容器，不能插入子元素
+    if(!config[parentNode.type].isContainer) {
+        throw Error('Cannot appendChild in a non-container element');
+    }
+    //如果已经在树中，先移除
+    removeNode(childNode);
+    //插入新树
+    parentNode.childNodes.push(childNode);
+    childNode.parentId = parentNode.id;
+    childNode.getParentNode = () => parentNode;
+};
+
+const removeNode = (childNode) => {
+    if(childNode.parentId) {
+        let parentNode = childNode.getParentNode();
+        let index = parentNode.childNodes.indexOf(childNode);
+        parentNode.childNodes.splice(index, 1);
+        childNode.parentId = 0;
+        childNode.getParentNode = () => null;
+    }
+};
+
+const insertBefore = (baseNode, childNode) => {
+    if(!baseNode.parentId) {
+        throw Error('Cannot insertBefore an element without parent');
+    }
+    removeNode(childNode);
+    let parentNode = baseNode.getParentNode();
+    let index = parentNode.childNodes.indexOf(baseNode);
+    parentNode.childNodes.splice(index, 0, childNode);
+    childNode.parentId = parentNode.id;
+    childNode.getParentNode = () => parentNode;
+};
+
+const insertAfter = (baseNode, childNode) => {
+    if(!baseNode.parentId) {
+        throw Error('Cannot insertBefore an element without parent');
+    }
+    removeNode(childNode);
+    let parentNode = baseNode.getParentNode();
+    let index = parentNode.childNodes.indexOf(baseNode);
+    parentNode.childNodes.splice(index + 1, 0, childNode);
+    childNode.parentId = parentNode.id;
+    childNode.getParentNode = () => parentNode;
+};
+
 var modules = [
     'MAIN',   //主框架，邮件最顶层结构有且只有一个主框架
     'IMG_CONTENT', //图片标题栏，下侧正文
@@ -633,4 +688,4 @@ var modules = [
 const Types = {};
 modules.forEach((m) => {Types[m] = m;});
 
-export { config, Types, parseNodeFromJSON, serializeNode as serializeNodeToJSON, buildHtmlFromNode };
+export { config, Types, parseNodeFromJSON, serializeNode as serializeNodeToJSON, buildHtmlFromNode, createNode, removeNode, appendChild, insertBefore, insertAfter };
