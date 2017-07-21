@@ -113,6 +113,10 @@ var parseNodeFromJSON = function parseNodeFromJSON(json) {
     var node = {};
     node.type = nodeType;
     node.id = getNewId();
+    node.parentId = 0;
+    node.getParentNode = function () {
+        return null;
+    };
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;

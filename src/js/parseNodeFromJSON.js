@@ -13,6 +13,8 @@ const parseNodeFromJSON = (json) => {
     let node = {};
     node.type = nodeType;
     node.id = getNewId();
+    node.parentId = 0;
+    node.getParentNode = () => null;
 
     for(let {name, defaultValue} of cfgNode.properties) {
         node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
