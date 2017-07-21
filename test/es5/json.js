@@ -16,7 +16,7 @@ export default {
             paddingTop: '40px',
             paddingBottom: '40px',
             imgWidth: '640px',
-            height: '330px',
+            imgHeight: '330px',
             childNodes: [
                 {
                     type: Types.TEXT,
