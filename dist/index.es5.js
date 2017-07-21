@@ -292,7 +292,7 @@ function pug_style(r) {
             var block = this && this.block,
                 attributes = this && this.attributes || {};
             var height = node.height;
-            if (parentNode.type === Types.MAIN) {
+            if (parentNode && parentNode.type === Types.MAIN) {
                 pug_html = pug_html + '<td' + pug_attr("style", pug_style(parseStyle({
                     'height': height,
                     'line-height': height

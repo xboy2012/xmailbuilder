@@ -237,7 +237,7 @@ pug_html = pug_html + (null == (pug_interp = html) ? "" : pug_interp);
 pug_mixins["BLANK"] = pug_interp = function(node, parentNode){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 var height = node.height;
-if (parentNode.type === Types.MAIN) {
+if ((parentNode && parentNode.type === Types.MAIN)) {
 pug_html = pug_html + "\u003Ctd" + (pug_attr("style", pug_style(parseStyle({
                 'height': height,
                 'line-height': height
