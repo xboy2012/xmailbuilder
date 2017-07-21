@@ -2,6 +2,196 @@ import cheerio from 'cheerio';
 import juice from 'juice/client';
 import csso from 'csso';
 
+var MAIN = {
+    properties: [
+        {name: 'bgColor', type: 'string'}
+    ],
+    isContainer: true
+};
+
+var IMG_CONTENT = {
+    properties: [
+        {name: 'src', type: 'string'},
+        {name: 'alt', type: 'string'},
+        {name: 'fontSize', type: 'string'},
+        {name: 'fontColor', type: 'string'},
+        {name: 'lineHeight', type: 'string'},
+        {name: 'bgColor', type: 'string'},
+        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
+        {name: 'paddingTop', type: 'string', defaultValue: '0'},
+        {name: 'paddingRight', type: 'string', defaultValue: '0'},
+        {name: 'paddingBottom', type: 'string', defaultValue: '0'},
+        {name: 'imgWidth', type: 'string'},
+        {name: 'imgHeight', type: 'string'}
+    ],
+    isContainer: true
+};
+
+var TITLE_CONTENT = {
+    properties: [
+        {name: 'title', type: 'string', defaultValue: '这是标题'},
+        {name: 'fontSize', type: 'string'},
+        {name: 'fontColor', type: 'string'},
+        {name: 'lineHeight', type: 'string'},
+        {name: 'bgColor', type: 'string'},
+        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
+        {name: 'paddingTop', type: 'string', defaultValue: '0'},
+        {name: 'paddingRight', type: 'string', defaultValue: '0'},
+        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
+    ],
+    isContainer: true
+};
+
+var BOTTOM_QR = {
+    properties: [],
+    isContainer: false
+};
+
+var SIGNATURE = {
+    properties: [
+        {name: 'date', type: 'string'}
+    ],
+    isContainer: false
+};
+
+var IMG = {
+    properties: [
+        {name: 'src', type: 'string'},
+        {name: 'alt', type: 'string'},
+        {name: 'imgWidth', type: 'string'},
+        {name: 'imgHeight', type: 'string'}
+    ],
+    isContainer: false
+};
+
+var IMG_LINK = {
+    properties: [
+        {name: 'src', type: 'string'},
+        {name: 'alt', type: 'string'},
+        {name: 'url', type: 'string'},
+        {name: 'imgWidth', type: 'string'},
+        {name: 'imgHeight', type: 'string'}
+    ],
+    isContainer: false
+};
+
+var CONTAINER = {
+    properties: [
+        {name: 'bgColor', type: 'string'},
+        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
+        {name: 'paddingTop', type: 'string', defaultValue: '0'},
+        {name: 'paddingRight', type: 'string', defaultValue: '0'},
+        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
+    ],
+    isContainer: true
+};
+
+var TEXT = {
+    properties: [
+        {name: 'text', type: 'string'},
+        {name: 'fontColor', type: 'string'},
+        {name: 'fontSize', type: 'string'},
+        {name: 'lineHeight', type: 'string'},
+        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
+        {name: 'paddingTop', type: 'string', defaultValue: '0'},
+        {name: 'paddingRight', type: 'string', defaultValue: '0'},
+        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
+    ],
+    isContainer: false
+};
+
+var HTML = {
+    properties: [
+        {name: 'html', type: 'string', defaultValue: ''}
+    ],
+    isContainer: false
+};
+
+var BLANK = {
+    properties: [
+        {name: 'height', type: 'string', defaultValue: '0'}
+    ],
+    isContainer: false
+};
+
+var LIST = {
+    properties: [
+        {name: 'bulletColor', type: 'string'},
+        {name: 'fontColor', type: 'string'},
+        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
+        {name: 'paddingTop', type: 'string', defaultValue: '0'},
+        {name: 'paddingRight', type: 'string', defaultValue: '0'},
+        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
+    ],
+    isContainer: true
+};
+
+var LIST_ITEM = {
+    properties: [
+        {name: 'fontColor', type: 'string'}
+    ],
+    isContainer: true
+};
+
+var config = {
+"MAIN": MAIN,
+"IMG_CONTENT": IMG_CONTENT,
+"TITLE_CONTENT": TITLE_CONTENT,
+"BOTTOM_QR": BOTTOM_QR,
+"SIGNATURE": SIGNATURE,
+"IMG": IMG,
+"IMG_LINK": IMG_LINK,
+"CONTAINER": CONTAINER,
+"TEXT": TEXT,
+"HTML": HTML,
+"BLANK": BLANK,
+"LIST": LIST,
+"LIST_ITEM": LIST_ITEM
+};
+
+//格式化节点，添加默认值
+const formatNode = (node) => {
+    let nodeType = node.type;
+    let cfgNode = config[nodeType];
+    let newNode = {};
+    newNode.type = nodeType;
+
+    for(let {name, defaultValue} of cfgNode.properties) {
+        newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
+    }
+
+    if(cfgNode.isContainer) {
+        newNode.childNodes = (node.childNodes || []).map((o) => {
+            o = formatNode(o);
+            o.parentNode = newNode;
+            return o;
+        });
+    }
+
+    return newNode;
+};
+
+/**
+ * 序列化节点信息用于存储
+ * @param node
+ * @returns {{}}
+ */
+const serializeNode = (node) => {
+    let nodeType = node.type;
+    let cfgNode = config[nodeType];
+    let newNode = {};
+    newNode.type = nodeType;
+
+    for(let {name} of cfgNode.properties) {
+        newNode[name] = node[name];
+    }
+    if(cfgNode.isContainer) {
+        newNode.childNodes = node.childNodes.map((o) => serializeNode(o));
+    }
+
+    return newNode;
+};
+
 function pug_attr(t,e,n,f){return e!==!1&&null!=e&&(e||"class"!==t&&"style"!==t)?e===!0?" "+(f?t:t+'="'+t+'"'):("function"==typeof e.toJSON&&(e=e.toJSON()),"string"==typeof e||(e=JSON.stringify(e),n||e.indexOf('"')===-1)?(n&&(e=pug_escape(e))," "+t+'="'+e+'"'):" "+t+"='"+e.replace(/'/g,"&#39;")+"'"):""}
 function pug_escape(e){var a=""+e,t=pug_match_html.exec(a);if(!t)return e;var r,c,n,s="";for(r=t.index,c=0;r<a.length;r++){switch(a.charCodeAt(r)){case 34:n="&quot;";break;case 38:n="&amp;";break;case 60:n="&lt;";break;case 62:n="&gt;";break;default:continue}c!==r&&(s+=a.substring(c,r)),c=r+1,s+=n;}return c!==r?s+a.substring(c,r):s}
 var pug_has_own_property=Object.prototype.hasOwnProperty;
@@ -380,167 +570,34 @@ pug_mixins["createPartialPug"](node, null);}.call(this,"node" in locals_for_with
 
 var css_code = "::-webkit-scrollbar{display:none}a{text-decoration:none}a:not(.nolink){color:#0067ed;cursor:pointer}.main,body,p{margin:0;padding:0}img{display:inline-block;border:0}table{border-collapse:collapse;border:0}.main{font-family:Helvetica,\"Helvetica Neue\",\"Helvetica Neue Light\",HelveticaNeue-Light,'微软雅黑','Microsoft Yahei',Calibri,Arial,sans-serif;padding:40px}.main>table,.section,img{margin:auto}.section{background-color:#fff;border-radius:10px;overflow:hidden;width:640px}.section.title>tbody>tr>th{padding:32px 40px 0;font-weight:400}.section.title>tbody>tr>th>p{text-align:center;font-size:26px;margin:0}.section.title>tbody>tr>th>p>span{padding:0 15px}";
 
-var MAIN = {
-    properties: [
-        {name: 'bgColor', type: 'string'}
-    ],
-    isContainer: true
-};
+var buildHtmlFromNode = (node) => {
+    let html_code = xtmpl({node});
 
-var IMG_CONTENT = {
-    properties: [
-        {name: 'src', type: 'string'},
-        {name: 'alt', type: 'string'},
-        {name: 'fontSize', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'lineHeight', type: 'string'},
-        {name: 'bgColor', type: 'string'},
-        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
-        {name: 'paddingTop', type: 'string', defaultValue: '0'},
-        {name: 'paddingRight', type: 'string', defaultValue: '0'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
-    ],
-    isContainer: true
-};
+    let $ = cheerio.load(html_code, {
+        lowerCaseTags: true,
+        lowerCaseAttributeNames: true,
+        decodeEntities: false,
+        recognizeSelfClosing: true
+    });
+    juice.juiceDocument($, {
+        extraCss: css_code,
+        applyAttributesTableElements: true
+    });
 
-var TITLE_CONTENT = {
-    properties: [
-        {name: 'title', type: 'string', defaultValue: '这是标题'},
-        {name: 'fontSize', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'lineHeight', type: 'string'},
-        {name: 'bgColor', type: 'string'},
-        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
-        {name: 'paddingTop', type: 'string', defaultValue: '0'},
-        {name: 'paddingRight', type: 'string', defaultValue: '0'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
-    ],
-    isContainer: true
-};
+    //删除id和class
+    $('[id]').removeAttr('id');
+    $('[class]').removeAttr('class');
 
-var BOTTOM_QR = {
-    properties: [],
-    isContainer: false
-};
+    //压缩优化style
+    $('[style]').each((i, el) => {
+        let $el = $(el);
+        let style = $el.attr('style');
+        style = csso.minifyBlock(style, {}).css;
+        $el.attr('style', style);
+    });
 
-var SIGNATURE = {
-    properties: [
-        {name: 'date', type: 'string'}
-    ],
-    isContainer: false
-};
-
-var IMG = {
-    properties: [
-        {name: 'src', type: 'string'},
-        {name: 'alt', type: 'string'}
-    ],
-    isContainer: false
-};
-
-var IMG_LINK = {
-    properties: [
-        {name: 'src', type: 'string'},
-        {name: 'alt', type: 'string'},
-        {name: 'url', type: 'string'}
-    ],
-    isContainer: false
-};
-
-var CONTAINER = {
-    properties: [
-        {name: 'bgColor', type: 'string'},
-        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
-        {name: 'paddingTop', type: 'string', defaultValue: '0'},
-        {name: 'paddingRight', type: 'string', defaultValue: '0'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
-    ],
-    isContainer: true
-};
-
-var TEXT = {
-    properties: [
-        {name: 'text', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'fontSize', type: 'string'},
-        {name: 'lineHeight', type: 'string'},
-        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
-        {name: 'paddingTop', type: 'string', defaultValue: '0'},
-        {name: 'paddingRight', type: 'string', defaultValue: '0'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
-    ],
-    isContainer: false
-};
-
-var HTML = {
-    properties: [
-        {name: 'html', type: 'string', defaultValue: ''}
-    ],
-    isContainer: false
-};
-
-var BLANK = {
-    properties: [
-        {name: 'height', type: 'string', defaultValue: '0'}
-    ],
-    isContainer: false
-};
-
-var LIST = {
-    properties: [
-        {name: 'bulletColor', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'paddingLeft', type: 'string', defaultValue: '0'},
-        {name: 'paddingTop', type: 'string', defaultValue: '0'},
-        {name: 'paddingRight', type: 'string', defaultValue: '0'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
-    ],
-    isContainer: true
-};
-
-var LIST_ITEM = {
-    properties: [
-        {name: 'fontColor', type: 'string'}
-    ],
-    isContainer: true
-};
-
-var config = {
-"MAIN": MAIN,
-"IMG_CONTENT": IMG_CONTENT,
-"TITLE_CONTENT": TITLE_CONTENT,
-"BOTTOM_QR": BOTTOM_QR,
-"SIGNATURE": SIGNATURE,
-"IMG": IMG,
-"IMG_LINK": IMG_LINK,
-"CONTAINER": CONTAINER,
-"TEXT": TEXT,
-"HTML": HTML,
-"BLANK": BLANK,
-"LIST": LIST,
-"LIST_ITEM": LIST_ITEM
-};
-
-//格式化节点，添加默认值
-const formatNode = (node) => {
-    let nodeType = node.type;
-    let cfgNode = config[nodeType];
-    let newNode = {};
-    newNode.type = nodeType;
-
-    for(let {name, defaultValue} of cfgNode.properties) {
-        newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
-    }
-
-    if(cfgNode.isContainer) {
-        newNode.childNodes = (node.childNodes || []).map((o) => {
-            o = formatNode(o);
-            o.parentNode = newNode;
-            return o;
-        });
-    }
-
-    return newNode;
+    html_code = $.html();
+    return html_code;
 };
 
 var modules = [
@@ -562,82 +619,4 @@ var modules = [
 const Types = {};
 modules.forEach((m) => {Types[m] = m;});
 
-const calculateSize_browser = (url) => {
-    return new Promise((resolve, reject) => {
-        let img = document.createElement('img');
-        img.onload = () => {
-            resolve([img.width, img.height]);
-        };
-        img.onerror = reject;
-        img.src = url;
-    });
-};
-
-const readNode = (node, promises) => {
-    let nodeType = node.type;
-
-    if(nodeType === Types.IMG || nodeType === Types.IMG_CONTENT || nodeType === Types.IMG_LINK) {
-        let url = node.src;
-        let key = `CACHE_${url}`;
-        if(!promises.has(key)) {
-
-            let promise = calculateSize_browser(url).then(([width, height]) => {
-                node.imgWidth = width;
-                node.imgHeight = height;
-            });
-            promises.set(key, promise);
-        }
-    }
-
-    let cfgNode = config[nodeType];
-    for(let {name, type} of cfgNode.properties) {
-        if(type === 'nodes') {
-            for(let childNode of node[name]) {
-                readNode(childNode, promises);
-            }
-        }
-    }
-};
-
-var calculateImageSize = (node) => {
-    let promises = new Map();
-    readNode(node, promises);
-    promises = Array.from(promises.values());
-    return Promise.all(promises);
-};
-
-const build = (node) => {
-    node = formatNode(node);
-    return calculateImageSize(node).then(() => {
-        let html_code = xtmpl({node});
-
-        let $ = cheerio.load(html_code, {
-            lowerCaseTags: true,
-            lowerCaseAttributeNames: true,
-            decodeEntities: false,
-            recognizeSelfClosing: true
-        });
-        juice.juiceDocument($, {
-            extraCss: css_code,
-            applyAttributesTableElements: true
-        });
-
-        //删除id和class
-        $('[id]').removeAttr('id');
-        $('[class]').removeAttr('class');
-
-        //压缩优化style
-        $('[style]').each((i, el) => {
-            let $el = $(el);
-            let style = $el.attr('style');
-            style = csso.minifyBlock(style, {}).css;
-            $el.attr('style', style);
-        });
-
-
-        html_code = $.html();
-        return html_code;
-    });
-};
-
-export { config, Types, build };
+export { config, Types, formatNode as parseNodeFromJSON, serializeNode as serializeNodeToJSON, buildHtmlFromNode };

@@ -1,9 +1,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.build = exports.Types = exports.config = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+exports.buildHtmlFromNode = exports.serializeNodeToJSON = exports.parseNodeFromJSON = exports.Types = exports.config = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -20,6 +18,177 @@ var _csso = require('csso');
 var _csso2 = _interopRequireDefault(_csso);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MAIN = {
+    properties: [{ name: 'bgColor', type: 'string' }],
+    isContainer: true
+};
+
+var IMG_CONTENT = {
+    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'imgWidth', type: 'string' }, { name: 'imgHeight', type: 'string' }],
+    isContainer: true
+};
+
+var TITLE_CONTENT = {
+    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: true
+};
+
+var BOTTOM_QR = {
+    properties: [],
+    isContainer: false
+};
+
+var SIGNATURE = {
+    properties: [{ name: 'date', type: 'string' }],
+    isContainer: false
+};
+
+var IMG = {
+    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'imgWidth', type: 'string' }, { name: 'imgHeight', type: 'string' }],
+    isContainer: false
+};
+
+var IMG_LINK = {
+    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'url', type: 'string' }, { name: 'imgWidth', type: 'string' }, { name: 'imgHeight', type: 'string' }],
+    isContainer: false
+};
+
+var CONTAINER = {
+    properties: [{ name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: true
+};
+
+var TEXT = {
+    properties: [{ name: 'text', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: false
+};
+
+var HTML = {
+    properties: [{ name: 'html', type: 'string', defaultValue: '' }],
+    isContainer: false
+};
+
+var BLANK = {
+    properties: [{ name: 'height', type: 'string', defaultValue: '0' }],
+    isContainer: false
+};
+
+var LIST = {
+    properties: [{ name: 'bulletColor', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    isContainer: true
+};
+
+var LIST_ITEM = {
+    properties: [{ name: 'fontColor', type: 'string' }],
+    isContainer: true
+};
+
+var config = {
+    "MAIN": MAIN,
+    "IMG_CONTENT": IMG_CONTENT,
+    "TITLE_CONTENT": TITLE_CONTENT,
+    "BOTTOM_QR": BOTTOM_QR,
+    "SIGNATURE": SIGNATURE,
+    "IMG": IMG,
+    "IMG_LINK": IMG_LINK,
+    "CONTAINER": CONTAINER,
+    "TEXT": TEXT,
+    "HTML": HTML,
+    "BLANK": BLANK,
+    "LIST": LIST,
+    "LIST_ITEM": LIST_ITEM
+};
+
+//格式化节点，添加默认值
+var formatNode = function formatNode(node) {
+    var nodeType = node.type;
+    var cfgNode = config[nodeType];
+    var newNode = {};
+    newNode.type = nodeType;
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = cfgNode.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var _step$value = _step.value,
+                name = _step$value.name,
+                defaultValue = _step$value.defaultValue;
+
+            newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
+    if (cfgNode.isContainer) {
+        newNode.childNodes = (node.childNodes || []).map(function (o) {
+            o = formatNode(o);
+            o.parentNode = newNode;
+            return o;
+        });
+    }
+
+    return newNode;
+};
+
+/**
+ * 序列化节点信息用于存储
+ * @param node
+ * @returns {{}}
+ */
+var serializeNode = function serializeNode(node) {
+    var nodeType = node.type;
+    var cfgNode = config[nodeType];
+    var newNode = {};
+    newNode.type = nodeType;
+
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+        for (var _iterator2 = cfgNode.properties[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var name = _step2.value.name;
+
+            newNode[name] = node[name];
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+            }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
+
+    if (cfgNode.isContainer) {
+        newNode.childNodes = node.childNodes.map(function (o) {
+            return serializeNode(o);
+        });
+    }
+
+    return newNode;
+};
 
 function pug_attr(t, e, n, f) {
     return e !== !1 && null != e && (e || "class" !== t && "style" !== t) ? e === !0 ? " " + (f ? t : t + '="' + t + '"') : ("function" == typeof e.toJSON && (e = e.toJSON()), "string" == typeof e || (e = JSON.stringify(e), n || e.indexOf('"') === -1) ? (n && (e = pug_escape(e)), " " + t + '="' + e + '"') : " " + t + "='" + e.replace(/'/g, "&#39;") + "'") : "";
@@ -411,130 +580,34 @@ function pug_style(r) {
 
 var css_code = "::-webkit-scrollbar{display:none}a{text-decoration:none}a:not(.nolink){color:#0067ed;cursor:pointer}.main,body,p{margin:0;padding:0}img{display:inline-block;border:0}table{border-collapse:collapse;border:0}.main{font-family:Helvetica,\"Helvetica Neue\",\"Helvetica Neue Light\",HelveticaNeue-Light,'微软雅黑','Microsoft Yahei',Calibri,Arial,sans-serif;padding:40px}.main>table,.section,img{margin:auto}.section{background-color:#fff;border-radius:10px;overflow:hidden;width:640px}.section.title>tbody>tr>th{padding:32px 40px 0;font-weight:400}.section.title>tbody>tr>th>p{text-align:center;font-size:26px;margin:0}.section.title>tbody>tr>th>p>span{padding:0 15px}";
 
-var MAIN = {
-    properties: [{ name: 'bgColor', type: 'string' }],
-    isContainer: true
-};
+var buildHtmlFromNode = function buildHtmlFromNode(node) {
+    var html_code = xtmpl({ node: node });
 
-var IMG_CONTENT = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
-    isContainer: true
-};
+    var $ = _cheerio2.default.load(html_code, {
+        lowerCaseTags: true,
+        lowerCaseAttributeNames: true,
+        decodeEntities: false,
+        recognizeSelfClosing: true
+    });
+    _client2.default.juiceDocument($, {
+        extraCss: css_code,
+        applyAttributesTableElements: true
+    });
 
-var TITLE_CONTENT = {
-    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
-    isContainer: true
-};
+    //删除id和class
+    $('[id]').removeAttr('id');
+    $('[class]').removeAttr('class');
 
-var BOTTOM_QR = {
-    properties: [],
-    isContainer: false
-};
+    //压缩优化style
+    $('[style]').each(function (i, el) {
+        var $el = $(el);
+        var style = $el.attr('style');
+        style = _csso2.default.minifyBlock(style, {}).css;
+        $el.attr('style', style);
+    });
 
-var SIGNATURE = {
-    properties: [{ name: 'date', type: 'string' }],
-    isContainer: false
-};
-
-var IMG = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }],
-    isContainer: false
-};
-
-var IMG_LINK = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'url', type: 'string' }],
-    isContainer: false
-};
-
-var CONTAINER = {
-    properties: [{ name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
-    isContainer: true
-};
-
-var TEXT = {
-    properties: [{ name: 'text', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
-    isContainer: false
-};
-
-var HTML = {
-    properties: [{ name: 'html', type: 'string', defaultValue: '' }],
-    isContainer: false
-};
-
-var BLANK = {
-    properties: [{ name: 'height', type: 'string', defaultValue: '0' }],
-    isContainer: false
-};
-
-var LIST = {
-    properties: [{ name: 'bulletColor', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
-    isContainer: true
-};
-
-var LIST_ITEM = {
-    properties: [{ name: 'fontColor', type: 'string' }],
-    isContainer: true
-};
-
-var config = {
-    "MAIN": MAIN,
-    "IMG_CONTENT": IMG_CONTENT,
-    "TITLE_CONTENT": TITLE_CONTENT,
-    "BOTTOM_QR": BOTTOM_QR,
-    "SIGNATURE": SIGNATURE,
-    "IMG": IMG,
-    "IMG_LINK": IMG_LINK,
-    "CONTAINER": CONTAINER,
-    "TEXT": TEXT,
-    "HTML": HTML,
-    "BLANK": BLANK,
-    "LIST": LIST,
-    "LIST_ITEM": LIST_ITEM
-};
-
-//格式化节点，添加默认值
-var formatNode = function formatNode(node) {
-    var nodeType = node.type;
-    var cfgNode = config[nodeType];
-    var newNode = {};
-    newNode.type = nodeType;
-
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = cfgNode.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var _step$value = _step.value,
-                name = _step$value.name,
-                defaultValue = _step$value.defaultValue;
-
-            newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
-
-    if (cfgNode.isContainer) {
-        newNode.childNodes = (node.childNodes || []).map(function (o) {
-            o = formatNode(o);
-            o.parentNode = newNode;
-            return o;
-        });
-    }
-
-    return newNode;
+    html_code = $.html();
+    return html_code;
 };
 
 var modules = ['MAIN', //主框架，邮件最顶层结构有且只有一个主框架
@@ -557,131 +630,8 @@ modules.forEach(function (m) {
     Types[m] = m;
 });
 
-var calculateSize_browser = function calculateSize_browser(url) {
-    return new Promise(function (resolve, reject) {
-        var img = document.createElement('img');
-        img.onload = function () {
-            resolve([img.width, img.height]);
-        };
-        img.onerror = reject;
-        img.src = url;
-    });
-};
-
-var readNode = function readNode(node, promises) {
-    var nodeType = node.type;
-
-    if (nodeType === Types.IMG || nodeType === Types.IMG_CONTENT || nodeType === Types.IMG_LINK) {
-        var url = node.src;
-        var key = 'CACHE_' + url;
-        if (!promises.has(key)) {
-
-            var promise = calculateSize_browser(url).then(function (_ref) {
-                var _ref2 = _slicedToArray(_ref, 2),
-                    width = _ref2[0],
-                    height = _ref2[1];
-
-                node.imgWidth = width;
-                node.imgHeight = height;
-            });
-            promises.set(key, promise);
-        }
-    }
-
-    var cfgNode = config[nodeType];
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-        for (var _iterator2 = cfgNode.properties[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var _step2$value = _step2.value,
-                name = _step2$value.name,
-                type = _step2$value.type;
-
-            if (type === 'nodes') {
-                var _iteratorNormalCompletion3 = true;
-                var _didIteratorError3 = false;
-                var _iteratorError3 = undefined;
-
-                try {
-                    for (var _iterator3 = node[name][Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                        var childNode = _step3.value;
-
-                        readNode(childNode, promises);
-                    }
-                } catch (err) {
-                    _didIteratorError3 = true;
-                    _iteratorError3 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                            _iterator3.return();
-                        }
-                    } finally {
-                        if (_didIteratorError3) {
-                            throw _iteratorError3;
-                        }
-                    }
-                }
-            }
-        }
-    } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
-            }
-        } finally {
-            if (_didIteratorError2) {
-                throw _iteratorError2;
-            }
-        }
-    }
-};
-
-var calculateImageSize = function calculateImageSize(node) {
-    var promises = new Map();
-    readNode(node, promises);
-    promises = Array.from(promises.values());
-    return Promise.all(promises);
-};
-
-var build = function build(node) {
-    node = formatNode(node);
-    return calculateImageSize(node).then(function () {
-        var html_code = xtmpl({ node: node });
-
-        var $ = _cheerio2.default.load(html_code, {
-            lowerCaseTags: true,
-            lowerCaseAttributeNames: true,
-            decodeEntities: false,
-            recognizeSelfClosing: true
-        });
-        _client2.default.juiceDocument($, {
-            extraCss: css_code,
-            applyAttributesTableElements: true
-        });
-
-        //删除id和class
-        $('[id]').removeAttr('id');
-        $('[class]').removeAttr('class');
-
-        //压缩优化style
-        $('[style]').each(function (i, el) {
-            var $el = $(el);
-            var style = $el.attr('style');
-            style = _csso2.default.minifyBlock(style, {}).css;
-            $el.attr('style', style);
-        });
-
-        html_code = $.html();
-        return html_code;
-    });
-};
-
 exports.config = config;
 exports.Types = Types;
-exports.build = build;
+exports.parseNodeFromJSON = formatNode;
+exports.serializeNodeToJSON = serializeNode;
+exports.buildHtmlFromNode = buildHtmlFromNode;

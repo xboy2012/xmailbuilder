@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import {ROOT_DIR} from './tasks/core/consts';
+import {ROOT_DIR} from './utils/consts';
 import pug from 'pug';
 import csso from 'csso';
 import stylus from 'stylus';
@@ -7,8 +7,8 @@ import {rollup} from 'rollup';
 import * as babel from 'babel-core';
 import modules from './src/js/modules';
 import Types from './src/js/types';
-import readFile from './tasks/core/readFile';
-import writeFile from './tasks/core/writeFile';
+import readFile from './utils/readFile';
+import writeFile from './utils/writeFile';
 
 const log = (...args) => {
     console.log(...args);

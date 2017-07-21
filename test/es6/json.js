@@ -1,4 +1,4 @@
-import {Types} from '../dist/index.es6';
+import {Types} from '../../dist/index.es6';
 
 export default {
     type: Types.MAIN,

@@ -1,4 +1,4 @@
-import {Types} from '../dist/index.es6';
+let {Types} = require('../../dist/index.es5');
 
 export default {
     type: Types.MAIN,
