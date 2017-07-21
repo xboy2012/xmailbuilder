@@ -1,26 +1,37 @@
 import config from './_generated/config';
 
-//格式化节点，添加默认值
-const formatNode = (node) => {
-    let nodeType = node.type;
-    let cfgNode = config[nodeType];
-    let newNode = {};
-    newNode.type = nodeType;
+export default (json) => {
 
-    for(let {name, defaultValue} of cfgNode.properties) {
-        newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
-    }
+    let ct = 0;
+    const getNewId = () => {
+        ct++;
+        return ct;
+    };
 
-    if(cfgNode.isContainer) {
-        newNode.childNodes = (node.childNodes || []).map((o) => {
-            o = formatNode(o);
-            o.parentNode = newNode;
-            return o;
-        });
-    }
+    //格式化节点，添加默认值
+    const formatNode = (json) => {
+        let nodeType = json.type;
+        let cfgNode = config[nodeType];
+        let node = {};
+        node.type = nodeType;
+        node.id = getNewId();
 
-    return newNode;
+        for(let {name, defaultValue} of cfgNode.properties) {
+            node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
+        }
+
+        if(cfgNode.isContainer) {
+            node.childNodes = (json.childNodes || []).map((o) => {
+                o = formatNode(o);
+                o.parentId = node.id;            //父节点ID
+                o.getParentNode = () => node;    //父节点信息
+                return o;
+            });
+        }
+
+        return node;
+    };
+
+
+    return formatNode(json);
 };
-
-
-export default formatNode;

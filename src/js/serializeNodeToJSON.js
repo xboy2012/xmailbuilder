@@ -8,17 +8,17 @@ import config from './_generated/config';
 const serializeNode = (node) => {
     let nodeType = node.type;
     let cfgNode = config[nodeType];
-    let newNode = {};
-    newNode.type = nodeType;
+    let json = {};
+    json.type = nodeType;
 
     for(let {name} of cfgNode.properties) {
-        newNode[name] = node[name];
+        json[name] = node[name];
     }
     if(cfgNode.isContainer) {
-        newNode.childNodes = node.childNodes.map((o) => serializeNode(o));
+        json.childNodes = node.childNodes.map((o) => serializeNode(o));
     }
 
-    return newNode;
+    return json;
 };
 
 export default serializeNode;

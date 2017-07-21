@@ -100,49 +100,64 @@ var config = {
     "LIST_ITEM": LIST_ITEM
 };
 
-//格式化节点，添加默认值
-var formatNode = function formatNode(node) {
-    var nodeType = node.type;
-    var cfgNode = config[nodeType];
-    var newNode = {};
-    newNode.type = nodeType;
+var parseNodeFromJSON = function parseNodeFromJSON(json) {
 
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+    var ct = 0;
+    var getNewId = function getNewId() {
+        ct++;
+        return ct;
+    };
 
-    try {
-        for (var _iterator = cfgNode.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var _step$value = _step.value,
-                name = _step$value.name,
-                defaultValue = _step$value.defaultValue;
+    //格式化节点，添加默认值
+    var formatNode = function formatNode(json) {
+        var nodeType = json.type;
+        var cfgNode = config[nodeType];
+        var node = {};
+        node.type = nodeType;
+        node.id = getNewId();
 
-            newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
         try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
+            for (var _iterator = cfgNode.properties[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var _step$value = _step.value,
+                    name = _step$value.name,
+                    defaultValue = _step$value.defaultValue;
+
+                node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
             }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
         } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
             }
         }
-    }
 
-    if (cfgNode.isContainer) {
-        newNode.childNodes = (node.childNodes || []).map(function (o) {
-            o = formatNode(o);
-            o.parentNode = newNode;
-            return o;
-        });
-    }
+        if (cfgNode.isContainer) {
+            node.childNodes = (json.childNodes || []).map(function (o) {
+                o = formatNode(o);
+                o.parentId = node.id; //父节点ID
+                o.getParentNode = function () {
+                    return node;
+                }; //父节点信息
+                return o;
+            });
+        }
 
-    return newNode;
+        return node;
+    };
+
+    return formatNode(json);
 };
 
 /**
@@ -153,8 +168,8 @@ var formatNode = function formatNode(node) {
 var serializeNode = function serializeNode(node) {
     var nodeType = node.type;
     var cfgNode = config[nodeType];
-    var newNode = {};
-    newNode.type = nodeType;
+    var json = {};
+    json.type = nodeType;
 
     var _iteratorNormalCompletion2 = true;
     var _didIteratorError2 = false;
@@ -164,7 +179,7 @@ var serializeNode = function serializeNode(node) {
         for (var _iterator2 = cfgNode.properties[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var name = _step2.value.name;
 
-            newNode[name] = node[name];
+            json[name] = node[name];
         }
     } catch (err) {
         _didIteratorError2 = true;
@@ -182,12 +197,12 @@ var serializeNode = function serializeNode(node) {
     }
 
     if (cfgNode.isContainer) {
-        newNode.childNodes = node.childNodes.map(function (o) {
+        json.childNodes = node.childNodes.map(function (o) {
             return serializeNode(o);
         });
     }
 
-    return newNode;
+    return json;
 };
 
 function pug_attr(t, e, n, f) {
@@ -632,6 +647,6 @@ modules.forEach(function (m) {
 
 exports.config = config;
 exports.Types = Types;
-exports.parseNodeFromJSON = formatNode;
+exports.parseNodeFromJSON = parseNodeFromJSON;
 exports.serializeNodeToJSON = serializeNode;
 exports.buildHtmlFromNode = buildHtmlFromNode;

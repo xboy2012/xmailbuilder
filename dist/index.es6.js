@@ -149,26 +149,40 @@ var config = {
 "LIST_ITEM": LIST_ITEM
 };
 
-//格式化节点，添加默认值
-const formatNode = (node) => {
-    let nodeType = node.type;
-    let cfgNode = config[nodeType];
-    let newNode = {};
-    newNode.type = nodeType;
+var parseNodeFromJSON = (json) => {
 
-    for(let {name, defaultValue} of cfgNode.properties) {
-        newNode[name] = node.hasOwnProperty(name) ? node[name] : defaultValue;
-    }
+    let ct = 0;
+    const getNewId = () => {
+        ct++;
+        return ct;
+    };
 
-    if(cfgNode.isContainer) {
-        newNode.childNodes = (node.childNodes || []).map((o) => {
-            o = formatNode(o);
-            o.parentNode = newNode;
-            return o;
-        });
-    }
+    //格式化节点，添加默认值
+    const formatNode = (json) => {
+        let nodeType = json.type;
+        let cfgNode = config[nodeType];
+        let node = {};
+        node.type = nodeType;
+        node.id = getNewId();
 
-    return newNode;
+        for(let {name, defaultValue} of cfgNode.properties) {
+            node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
+        }
+
+        if(cfgNode.isContainer) {
+            node.childNodes = (json.childNodes || []).map((o) => {
+                o = formatNode(o);
+                o.parentId = node.id;            //父节点ID
+                o.getParentNode = () => node;    //父节点信息
+                return o;
+            });
+        }
+
+        return node;
+    };
+
+
+    return formatNode(json);
 };
 
 /**
@@ -179,17 +193,17 @@ const formatNode = (node) => {
 const serializeNode = (node) => {
     let nodeType = node.type;
     let cfgNode = config[nodeType];
-    let newNode = {};
-    newNode.type = nodeType;
+    let json = {};
+    json.type = nodeType;
 
     for(let {name} of cfgNode.properties) {
-        newNode[name] = node[name];
+        json[name] = node[name];
     }
     if(cfgNode.isContainer) {
-        newNode.childNodes = node.childNodes.map((o) => serializeNode(o));
+        json.childNodes = node.childNodes.map((o) => serializeNode(o));
     }
 
-    return newNode;
+    return json;
 };
 
 function pug_attr(t,e,n,f){return e!==!1&&null!=e&&(e||"class"!==t&&"style"!==t)?e===!0?" "+(f?t:t+'="'+t+'"'):("function"==typeof e.toJSON&&(e=e.toJSON()),"string"==typeof e||(e=JSON.stringify(e),n||e.indexOf('"')===-1)?(n&&(e=pug_escape(e))," "+t+'="'+e+'"'):" "+t+"='"+e.replace(/'/g,"&#39;")+"'"):""}
@@ -619,4 +633,4 @@ var modules = [
 const Types = {};
 modules.forEach((m) => {Types[m] = m;});
 
-export { config, Types, formatNode as parseNodeFromJSON, serializeNode as serializeNodeToJSON, buildHtmlFromNode };
+export { config, Types, parseNodeFromJSON, serializeNode as serializeNodeToJSON, buildHtmlFromNode };
