@@ -626,6 +626,7 @@ var createNode = function createNode(nodeType) {
         isContainer = _config$nodeType.isContainer;
 
     var json = {};
+    json.type = nodeType;
     var _iteratorNormalCompletion3 = true;
     var _didIteratorError3 = false;
     var _iteratorError3 = undefined;

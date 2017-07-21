@@ -4,6 +4,7 @@ import parseNodeFromJSON from './parseNodeFromJSON';
 export const createNode = (nodeType) => {
     let {properties, isContainer} = config[nodeType];
     let json = {};
+    json.type = nodeType;
     for(let {name, defaultValue} of properties) {
         if(defaultValue !== undefined) {
             json[name] = defaultValue;
