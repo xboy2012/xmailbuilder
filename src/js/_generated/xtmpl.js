@@ -286,7 +286,7 @@ pug_html = pug_html + "\u003C\u002Ful\u003E";
 };
 pug_mixins["LIST_ITEM"] = pug_interp = function(node, parentNode){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-var fontColor = node.fontColor || parentNode.fontColor;
+var fontColor = node.fontColor || (parentNode && parentNode.fontColor);
 var childNodes = node.childNodes;
 pug_html = pug_html + "\u003Cli\u003E";
 // iterate childNodes

@@ -342,7 +342,7 @@ function pug_style(r) {
         pug_mixins["LIST_ITEM"] = _pug_interp4 = function _pug_interp4(node, parentNode) {
             var block = this && this.block,
                 attributes = this && this.attributes || {};
-            var fontColor = node.fontColor || parentNode.fontColor;
+            var fontColor = node.fontColor || parentNode && parentNode.fontColor;
             var childNodes = node.childNodes;
             pug_html = pug_html + '<li>';
             // iterate childNodes

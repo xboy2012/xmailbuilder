@@ -1,7 +1,7 @@
 //- 组件名称：列表项
 mixin LIST_ITEM(node, parentNode)
     -
-        var fontColor = node.fontColor || parentNode.fontColor;
+        var fontColor = node.fontColor || (parentNode && parentNode.fontColor);
         var childNodes = node.childNodes;
     li
         each childNode in childNodes
