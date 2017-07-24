@@ -2,6 +2,7 @@ import parseNodeFromJSON from './parseNodeFromJSON';
 import serializeNodeToJSON from './serializeNodeToJSON';
 import buildHtmlFromNode from './buildHtmlFromNode';
 import {
+    getNodeById,
     createNode,
     removeNode,
     appendChild,
@@ -17,6 +18,7 @@ export {
     parseNodeFromJSON,
     serializeNodeToJSON,
     buildHtmlFromNode,
+    getNodeById,
     createNode,
     removeNode,
     appendChild,

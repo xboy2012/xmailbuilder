@@ -1,7 +1,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.insertAfter = exports.insertBefore = exports.appendChild = exports.removeNode = exports.createNode = exports.buildHtmlFromNode = exports.serializeNodeToJSON = exports.parseNodeFromJSON = exports.Types = exports.config = undefined;
+exports.insertAfter = exports.insertBefore = exports.appendChild = exports.removeNode = exports.createNode = exports.getNodeById = exports.buildHtmlFromNode = exports.serializeNodeToJSON = exports.parseNodeFromJSON = exports.Types = exports.config = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -760,6 +760,7 @@ exports.Types = Types;
 exports.parseNodeFromJSON = parseNodeFromJSON;
 exports.serializeNodeToJSON = serializeNode;
 exports.buildHtmlFromNode = buildHtmlFromNode;
+exports.getNodeById = getNodeById;
 exports.createNode = createNode;
 exports.removeNode = removeNode;
 exports.appendChild = appendChild;

@@ -698,4 +698,4 @@ var modules = [
 const Types = {};
 modules.forEach((m) => {Types[m] = m;});
 
-export { config, Types, parseNodeFromJSON, serializeNode as serializeNodeToJSON, buildHtmlFromNode, createNode, removeNode, appendChild, insertBefore, insertAfter };
+export { config, Types, parseNodeFromJSON, serializeNode as serializeNodeToJSON, buildHtmlFromNode, getNodeById, createNode, removeNode, appendChild, insertBefore, insertAfter };
