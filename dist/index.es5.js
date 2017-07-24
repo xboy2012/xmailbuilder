@@ -114,9 +114,6 @@ var parseNodeFromJSON = function parseNodeFromJSON(json) {
     node.type = nodeType;
     node.id = getNewId();
     node.parentId = 0;
-    node.getParentNode = function () {
-        return null;
-    };
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -149,9 +146,6 @@ var parseNodeFromJSON = function parseNodeFromJSON(json) {
         node.childNodes = (json.childNodes || []).map(function (o) {
             o = parseNodeFromJSON(o);
             o.parentId = node.id; //父节点ID
-            o.getParentNode = function () {
-                return node;
-            }; //父节点信息
             return o;
         });
     }
@@ -666,59 +660,79 @@ var createNode = function createNode(nodeType) {
     return parseNodeFromJSON(json);
 };
 
-var appendChild = function appendChild(parentNode, childNode) {
+var getNodeById = function getNodeById(parentNode, id) {
+    if (parentNode.id === id) return parentNode;
+    if (!parentNode.childNodes) return null;
+    var _iteratorNormalCompletion4 = true;
+    var _didIteratorError4 = false;
+    var _iteratorError4 = undefined;
+
+    try {
+        for (var _iterator4 = parentNode.childNodes[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+            var childNode = _step4.value;
+
+            var result = getNodeById(childNode, id);
+            if (result) return result;
+        }
+    } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                _iterator4.return();
+            }
+        } finally {
+            if (_didIteratorError4) {
+                throw _iteratorError4;
+            }
+        }
+    }
+
+    return null;
+};
+
+var appendChild = function appendChild(rootNode, parentNode, childNode) {
     //不是容器，不能插入子元素
     if (!config[parentNode.type].isContainer) {
         throw Error('Cannot appendChild in a non-container element');
     }
     //如果已经在树中，先移除
-    removeNode(childNode);
+    removeNode(rootNode, childNode);
     //插入新树
     parentNode.childNodes.push(childNode);
     childNode.parentId = parentNode.id;
-    childNode.getParentNode = function () {
-        return parentNode;
-    };
 };
 
-var removeNode = function removeNode(childNode) {
+var removeNode = function removeNode(rootNode, childNode) {
     if (childNode.parentId) {
-        var parentNode = childNode.getParentNode();
+        var parentNode = getNodeById(rootNode, childNode.parentId);
         var index = parentNode.childNodes.indexOf(childNode);
         parentNode.childNodes.splice(index, 1);
         childNode.parentId = 0;
-        childNode.getParentNode = function () {
-            return null;
-        };
     }
 };
 
-var insertBefore = function insertBefore(baseNode, childNode) {
+var insertBefore = function insertBefore(rootNode, baseNode, childNode) {
     if (!baseNode.parentId) {
         throw Error('Cannot insertBefore an element without parent');
     }
-    removeNode(childNode);
-    var parentNode = baseNode.getParentNode();
+    removeNode(rootNode, childNode);
+    var parentNode = getNodeById(rootNode, baseNode.parentId);
     var index = parentNode.childNodes.indexOf(baseNode);
     parentNode.childNodes.splice(index, 0, childNode);
     childNode.parentId = parentNode.id;
-    childNode.getParentNode = function () {
-        return parentNode;
-    };
 };
 
-var insertAfter = function insertAfter(baseNode, childNode) {
+var insertAfter = function insertAfter(rootNode, baseNode, childNode) {
     if (!baseNode.parentId) {
         throw Error('Cannot insertBefore an element without parent');
     }
-    removeNode(childNode);
-    var parentNode = baseNode.getParentNode();
+    removeNode(rootNode, childNode);
+    var parentNode = getNodeById(rootNode, baseNode.parentId);
     var index = parentNode.childNodes.indexOf(baseNode);
     parentNode.childNodes.splice(index + 1, 0, childNode);
     childNode.parentId = parentNode.id;
-    childNode.getParentNode = function () {
-        return parentNode;
-    };
 };
 
 var modules = ['MAIN', //主框架，邮件最顶层结构有且只有一个主框架

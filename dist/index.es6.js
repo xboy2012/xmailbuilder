@@ -163,7 +163,6 @@ const parseNodeFromJSON = (json) => {
     node.type = nodeType;
     node.id = getNewId();
     node.parentId = 0;
-    node.getParentNode = () => null;
 
     for(let {name, defaultValue} of cfgNode.properties) {
         node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
@@ -173,7 +172,6 @@ const parseNodeFromJSON = (json) => {
         node.childNodes = (json.childNodes || []).map((o) => {
             o = parseNodeFromJSON(o);
             o.parentId = node.id;            //父节点ID
-            o.getParentNode = () => node;    //父节点信息
             return o;
         });
     }
@@ -625,51 +623,60 @@ const createNode = (nodeType) => {
     return parseNodeFromJSON(json);
 };
 
-const appendChild = (parentNode, childNode) => {
+const getNodeById = (parentNode, id) => {
+    if(parentNode.id === id)
+        return parentNode;
+    if(!parentNode.childNodes)
+        return null;
+    for(let childNode of parentNode.childNodes) {
+        let result = getNodeById(childNode, id);
+        if(result)
+            return result;
+    }
+    return null;
+};
+
+const appendChild = (rootNode, parentNode, childNode) => {
     //不是容器，不能插入子元素
     if(!config[parentNode.type].isContainer) {
         throw Error('Cannot appendChild in a non-container element');
     }
     //如果已经在树中，先移除
-    removeNode(childNode);
+    removeNode(rootNode, childNode);
     //插入新树
     parentNode.childNodes.push(childNode);
     childNode.parentId = parentNode.id;
-    childNode.getParentNode = () => parentNode;
 };
 
-const removeNode = (childNode) => {
+const removeNode = (rootNode, childNode) => {
     if(childNode.parentId) {
-        let parentNode = childNode.getParentNode();
+        let parentNode = getNodeById(rootNode, childNode.parentId);
         let index = parentNode.childNodes.indexOf(childNode);
         parentNode.childNodes.splice(index, 1);
         childNode.parentId = 0;
-        childNode.getParentNode = () => null;
     }
 };
 
-const insertBefore = (baseNode, childNode) => {
+const insertBefore = (rootNode, baseNode, childNode) => {
     if(!baseNode.parentId) {
         throw Error('Cannot insertBefore an element without parent');
     }
-    removeNode(childNode);
-    let parentNode = baseNode.getParentNode();
+    removeNode(rootNode, childNode);
+    let parentNode = getNodeById(rootNode, baseNode.parentId);
     let index = parentNode.childNodes.indexOf(baseNode);
     parentNode.childNodes.splice(index, 0, childNode);
     childNode.parentId = parentNode.id;
-    childNode.getParentNode = () => parentNode;
 };
 
-const insertAfter = (baseNode, childNode) => {
+const insertAfter = (rootNode, baseNode, childNode) => {
     if(!baseNode.parentId) {
         throw Error('Cannot insertBefore an element without parent');
     }
-    removeNode(childNode);
-    let parentNode = baseNode.getParentNode();
+    removeNode(rootNode, childNode);
+    let parentNode =  getNodeById(rootNode, baseNode.parentId);
     let index = parentNode.childNodes.indexOf(baseNode);
     parentNode.childNodes.splice(index + 1, 0, childNode);
     childNode.parentId = parentNode.id;
-    childNode.getParentNode = () => parentNode;
 };
 
 var modules = [

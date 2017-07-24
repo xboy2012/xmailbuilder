@@ -14,7 +14,6 @@ const parseNodeFromJSON = (json) => {
     node.type = nodeType;
     node.id = getNewId();
     node.parentId = 0;
-    node.getParentNode = () => null;
 
     for(let {name, defaultValue} of cfgNode.properties) {
         node[name] = json.hasOwnProperty(name) ? json[name] : defaultValue;
@@ -24,7 +23,6 @@ const parseNodeFromJSON = (json) => {
         node.childNodes = (json.childNodes || []).map((o) => {
             o = parseNodeFromJSON(o);
             o.parentId = node.id;            //父节点ID
-            o.getParentNode = () => node;    //父节点信息
             return o;
         });
     }
