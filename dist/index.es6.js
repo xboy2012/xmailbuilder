@@ -4,25 +4,25 @@ import csso from 'csso';
 
 var MAIN = {
     properties: [
-        {name: 'bgColor', type: 'string'}
+        {name: 'bgColor', type: 'string', defaultValue: ''}
     ],
     isContainer: true
 };
 
 var IMG_CONTENT = {
     properties: [
-        {name: 'src', type: 'string'},
-        {name: 'alt', type: 'string'},
-        {name: 'fontSize', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'lineHeight', type: 'string'},
-        {name: 'bgColor', type: 'string'},
+        {name: 'src', type: 'string', defaultValue: ''},
+        {name: 'alt', type: 'string', defaultValue: ''},
+        {name: 'fontSize', type: 'string', defaultValue: ''},
+        {name: 'fontColor', type: 'string', defaultValue: ''},
+        {name: 'lineHeight', type: 'string', defaultValue: ''},
+        {name: 'bgColor', type: 'string', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
         {name: 'paddingBottom', type: 'string', defaultValue: '0'},
-        {name: 'imgWidth', type: 'string'},
-        {name: 'imgHeight', type: 'string'}
+        {name: 'imgWidth', type: 'string', defaultValue: ''},
+        {name: 'imgHeight', type: 'string', defaultValue: ''}
     ],
     isContainer: true
 };
@@ -30,10 +30,10 @@ var IMG_CONTENT = {
 var TITLE_CONTENT = {
     properties: [
         {name: 'title', type: 'string', defaultValue: '这是标题'},
-        {name: 'fontSize', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'lineHeight', type: 'string'},
-        {name: 'bgColor', type: 'string'},
+        {name: 'fontSize', type: 'string', defaultValue: ''},
+        {name: 'fontColor', type: 'string', defaultValue: ''},
+        {name: 'lineHeight', type: 'string', defaultValue: ''},
+        {name: 'bgColor', type: 'string', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
@@ -49,35 +49,35 @@ var BOTTOM_QR = {
 
 var SIGNATURE = {
     properties: [
-        {name: 'date', type: 'string'}
+        {name: 'date', type: 'string', defaultValue: ''}
     ],
     isContainer: false
 };
 
 var IMG = {
     properties: [
-        {name: 'src', type: 'string'},
-        {name: 'alt', type: 'string'},
-        {name: 'imgWidth', type: 'string'},
-        {name: 'imgHeight', type: 'string'}
+        {name: 'src', type: 'string', defaultValue: ''},
+        {name: 'alt', type: 'string', defaultValue: ''},
+        {name: 'imgWidth', type: 'string', defaultValue: ''},
+        {name: 'imgHeight', type: 'string', defaultValue: ''}
     ],
     isContainer: false
 };
 
 var IMG_LINK = {
     properties: [
-        {name: 'src', type: 'string'},
-        {name: 'alt', type: 'string'},
-        {name: 'url', type: 'string'},
-        {name: 'imgWidth', type: 'string'},
-        {name: 'imgHeight', type: 'string'}
+        {name: 'src', type: 'string', defaultValue: ''},
+        {name: 'alt', type: 'string', defaultValue: ''},
+        {name: 'url', type: 'string', defaultValue: ''},
+        {name: 'imgWidth', type: 'string', defaultValue: ''},
+        {name: 'imgHeight', type: 'string', defaultValue: ''}
     ],
     isContainer: false
 };
 
 var CONTAINER = {
     properties: [
-        {name: 'bgColor', type: 'string'},
+        {name: 'bgColor', type: 'string', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
@@ -88,10 +88,10 @@ var CONTAINER = {
 
 var TEXT = {
     properties: [
-        {name: 'text', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'fontSize', type: 'string'},
-        {name: 'lineHeight', type: 'string'},
+        {name: 'text', type: 'string', defaultValue: ''},
+        {name: 'fontColor', type: 'string', defaultValue: ''},
+        {name: 'fontSize', type: 'string', defaultValue: ''},
+        {name: 'lineHeight', type: 'string', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
@@ -116,8 +116,8 @@ var BLANK = {
 
 var LIST = {
     properties: [
-        {name: 'bulletColor', type: 'string'},
-        {name: 'fontColor', type: 'string'},
+        {name: 'bulletColor', type: 'string', defaultValue: ''},
+        {name: 'fontColor', type: 'string', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
@@ -128,7 +128,7 @@ var LIST = {
 
 var LIST_ITEM = {
     properties: [
-        {name: 'fontColor', type: 'string'}
+        {name: 'fontColor', type: 'string', defaultValue: ''}
     ],
     isContainer: true
 };
@@ -613,9 +613,7 @@ const createNode = (nodeType) => {
     let json = {};
     json.type = nodeType;
     for(let {name, defaultValue} of properties) {
-        if(defaultValue !== undefined) {
-            json[name] = defaultValue;
-        }
+        json[name] = defaultValue;
     }
     if(isContainer) {
         json.childNodes = [];

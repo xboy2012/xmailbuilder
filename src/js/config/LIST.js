@@ -1,7 +1,7 @@
 export default {
     properties: [
-        {name: 'bulletColor', type: 'string'},
-        {name: 'fontColor', type: 'string'},
+        {name: 'bulletColor', type: 'string', defaultValue: ''},
+        {name: 'fontColor', type: 'string', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},

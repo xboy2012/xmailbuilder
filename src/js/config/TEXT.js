@@ -1,9 +1,9 @@
 export default {
     properties: [
-        {name: 'text', type: 'string'},
-        {name: 'fontColor', type: 'string'},
-        {name: 'fontSize', type: 'string'},
-        {name: 'lineHeight', type: 'string'},
+        {name: 'text', type: 'string', defaultValue: ''},
+        {name: 'fontColor', type: 'string', defaultValue: ''},
+        {name: 'fontSize', type: 'string', defaultValue: ''},
+        {name: 'lineHeight', type: 'string', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},

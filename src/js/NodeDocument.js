@@ -6,9 +6,7 @@ export const createNode = (nodeType) => {
     let json = {};
     json.type = nodeType;
     for(let {name, defaultValue} of properties) {
-        if(defaultValue !== undefined) {
-            json[name] = defaultValue;
-        }
+        json[name] = defaultValue;
     }
     if(isContainer) {
         json.childNodes = [];

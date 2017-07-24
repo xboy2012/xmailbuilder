@@ -20,17 +20,17 @@ var _csso2 = _interopRequireDefault(_csso);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MAIN = {
-    properties: [{ name: 'bgColor', type: 'string' }],
+    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }],
     isContainer: true
 };
 
 var IMG_CONTENT = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'imgWidth', type: 'string' }, { name: 'imgHeight', type: 'string' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: '' }, { name: 'alt', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
     isContainer: true
 };
 
 var TITLE_CONTENT = {
-    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
@@ -40,27 +40,27 @@ var BOTTOM_QR = {
 };
 
 var SIGNATURE = {
-    properties: [{ name: 'date', type: 'string' }],
+    properties: [{ name: 'date', type: 'string', defaultValue: '' }],
     isContainer: false
 };
 
 var IMG = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'imgWidth', type: 'string' }, { name: 'imgHeight', type: 'string' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: '' }, { name: 'alt', type: 'string', defaultValue: '' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
     isContainer: false
 };
 
 var IMG_LINK = {
-    properties: [{ name: 'src', type: 'string' }, { name: 'alt', type: 'string' }, { name: 'url', type: 'string' }, { name: 'imgWidth', type: 'string' }, { name: 'imgHeight', type: 'string' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: '' }, { name: 'alt', type: 'string', defaultValue: '' }, { name: 'url', type: 'string', defaultValue: '' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
     isContainer: false
 };
 
 var CONTAINER = {
-    properties: [{ name: 'bgColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
 var TEXT = {
-    properties: [{ name: 'text', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'fontSize', type: 'string' }, { name: 'lineHeight', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'text', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
     isContainer: false
 };
 
@@ -75,12 +75,12 @@ var BLANK = {
 };
 
 var LIST = {
-    properties: [{ name: 'bulletColor', type: 'string' }, { name: 'fontColor', type: 'string' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'bulletColor', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
 var LIST_ITEM = {
-    properties: [{ name: 'fontColor', type: 'string' }],
+    properties: [{ name: 'fontColor', type: 'string', defaultValue: '' }],
     isContainer: true
 };
 
@@ -635,9 +635,7 @@ var createNode = function createNode(nodeType) {
                 name = _step3$value.name,
                 defaultValue = _step3$value.defaultValue;
 
-            if (defaultValue !== undefined) {
-                json[name] = defaultValue;
-            }
+            json[name] = defaultValue;
         }
     } catch (err) {
         _didIteratorError3 = true;

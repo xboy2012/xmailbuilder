@@ -1,6 +1,6 @@
 export default {
     properties: [
-        {name: 'date', type: 'string'}
+        {name: 'date', type: 'string', defaultValue: ''}
     ],
     isContainer: false
 };
