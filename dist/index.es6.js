@@ -1,6 +1,7 @@
 import cheerio from 'cheerio';
 import juice from 'juice/client';
 import csso from 'csso';
+import htmlclean from 'htmlclean';
 
 var MAIN = {
     properties: [
@@ -605,6 +606,7 @@ var buildHtmlFromNode = (node) => {
     });
 
     html_code = $.html();
+    html_code = htmlclean(html_code);
     return html_code;
 };
 

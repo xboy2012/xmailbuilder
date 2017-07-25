@@ -1,6 +1,6 @@
 {
   "name": "xmailbuilder",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "XMailBuilder",
   "main": "dist/index.es5.js",
   "module": "dist/index.es6.js",
@@ -40,6 +40,7 @@
     "ajv": "^5.2.2",
     "cheerio": "^0.22.0",
     "csso": "^3.1.1",
+    "htmlclean": "^3.0.2",
     "juice": "^4.1.0"
   }
 }

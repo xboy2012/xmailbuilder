@@ -3,6 +3,7 @@ import css_code from './_generated/css';
 import cheerio from 'cheerio';
 import juice from 'juice/client';
 import csso from 'csso';
+import htmlclean from 'htmlclean';
 
 export default (node) => {
     let html_code = templateFn({node});
@@ -31,5 +32,6 @@ export default (node) => {
     });
 
     html_code = $.html();
+    html_code = htmlclean(html_code);
     return html_code;
 };

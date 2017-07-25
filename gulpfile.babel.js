@@ -86,7 +86,7 @@ const buildJs = () => {
             'cheerio',
             'juice/client',
             'csso',
-            'htmlmin',
+            'htmlclean',
             'probe-image-size'
         ]
     }).then((bundle) => {

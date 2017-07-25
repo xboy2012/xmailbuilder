@@ -17,6 +17,10 @@ var _csso = require('csso');
 
 var _csso2 = _interopRequireDefault(_csso);
 
+var _htmlclean = require('htmlclean');
+
+var _htmlclean2 = _interopRequireDefault(_htmlclean);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MAIN = {
@@ -615,6 +619,7 @@ var buildHtmlFromNode = function buildHtmlFromNode(node) {
     });
 
     html_code = $.html();
+    html_code = (0, _htmlclean2.default)(html_code);
     return html_code;
 };
 
