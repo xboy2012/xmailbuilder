@@ -24,17 +24,17 @@ var _htmlclean2 = _interopRequireDefault(_htmlclean);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MAIN = {
-    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'bgColor', type: 'string', defaultValue: '#f0f1f2' }],
     isContainer: true
 };
 
 var IMG_CONTENT = {
-    properties: [{ name: 'src', type: 'string', defaultValue: '' }, { name: 'alt', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/20170712_01/3.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片容器' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
     isContainer: true
 };
 
 var TITLE_CONTENT = {
-    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }],
     isContainer: true
 };
 
@@ -44,42 +44,42 @@ var BOTTOM_QR = {
 };
 
 var SIGNATURE = {
-    properties: [{ name: 'date', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'date', type: 'string', defaultValue: 'XXXX年XX月XX日' }],
     isContainer: false
 };
 
 var IMG = {
-    properties: [{ name: 'src', type: 'string', defaultValue: '' }, { name: 'alt', type: 'string', defaultValue: '' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/p1.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片简介' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
     isContainer: false
 };
 
 var IMG_LINK = {
-    properties: [{ name: 'src', type: 'string', defaultValue: '' }, { name: 'alt', type: 'string', defaultValue: '' }, { name: 'url', type: 'string', defaultValue: '' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/wechat-qrcode.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片超链接' }, { name: 'url', type: 'string', defaultValue: 'https://qidian.qq.com' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
     isContainer: false
 };
 
 var CONTAINER = {
-    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }],
     isContainer: true
 };
 
 var TEXT = {
-    properties: [{ name: 'text', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'text', type: 'string', defaultValue: '我是文本' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
     isContainer: false
 };
 
 var HTML = {
-    properties: [{ name: 'html', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'html', type: 'string', defaultValue: '<span style="color:red">我是</span><span style="color:green">一段</span><span style="color:blue">富文本</span>' }],
     isContainer: false
 };
 
 var BLANK = {
-    properties: [{ name: 'height', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'height', type: 'string', defaultValue: '30px' }],
     isContainer: false
 };
 
 var LIST = {
-    properties: [{ name: 'bulletColor', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'bulletColor', type: 'string', defaultValue: '#007aff' }, { name: 'fontColor', type: 'string', defaultValue: '#000' }, { name: 'paddingLeft', type: 'string', defaultValue: '60px' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 

@@ -1,6 +1,6 @@
 export default {
     properties: [
-        {name: 'height', type: 'string', defaultValue: '0'}
+        {name: 'height', type: 'string', defaultValue: '30px'}
     ],
     isContainer: false
 };

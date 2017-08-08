@@ -1,6 +1,6 @@
 export default {
     properties: [
-        {name: 'text', type: 'string', defaultValue: ''},
+        {name: 'text', type: 'string', defaultValue: '我是文本'},
         {name: 'fontColor', type: 'string', defaultValue: ''},
         {name: 'fontSize', type: 'string', defaultValue: ''},
         {name: 'lineHeight', type: 'string', defaultValue: ''},
