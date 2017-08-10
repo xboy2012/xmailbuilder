@@ -111,7 +111,8 @@ else {
 pug_html = pug_html + "\u003Cdiv" + (pug_attr("style", pug_style(parseStyle({
                 'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
                 'background-color': bgColor,
-                'line-height': lineHeight
+                'line-height': lineHeight,
+                'border-radius': '10px'
             })), true, false)) + "\u003E";
 // iterate childNodes
 ;(function(){

@@ -47,7 +47,8 @@ mixin IMG_CONTENT(node, parentNode)
             style=parseStyle({
                 'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
                 'background-color': bgColor,
-                'line-height': lineHeight
+                'line-height': lineHeight,
+                'border-radius': '10px'
             })
         )
             each childNode in childNodes
