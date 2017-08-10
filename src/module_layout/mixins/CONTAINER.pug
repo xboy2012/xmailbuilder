@@ -6,12 +6,14 @@ mixin CONTAINER(node, parentNode)
         var paddingRight = node.paddingRight;
         var paddingTop = node.paddingTop;
         var paddingBottom = node.paddingBottom;
+        var lineHeight = node.lineHeight;
         var childNodes = node.childNodes;
 
     div(
         style=parseStyle({
             'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
-            'background-color': bgColor
+            'background-color': bgColor,
+            'line-height': lineHeight
         })
     )
         each childNode in childNodes

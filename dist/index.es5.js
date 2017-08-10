@@ -59,12 +59,12 @@ var IMG_LINK = {
 };
 
 var CONTAINER = {
-    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }],
+    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }],
     isContainer: true
 };
 
 var TEXT = {
-    properties: [{ name: 'text', type: 'string', defaultValue: '我是文本' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'text', type: 'string', defaultValue: '我是文本' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'bold', type: 'boolean', defaultValue: false }],
     isContainer: false
 };
 
@@ -305,33 +305,60 @@ function pug_style(r) {
             var imgWith = node.imgWidth;
             var imgHeight = node.imgHeight;
 
-            pug_html = pug_html + '<table' + (" class=\"banner section\"" + pug_attr("style", pug_style(parseStyle({
-                'background-color': bgColor
-            })), true, false) + pug_attr("bgColor", bgColor || false, true, false)) + '><tbody><tr><td><img' + (pug_attr("src", src || false, true, false) + pug_attr("alt", alt || false, true, false) + pug_attr("width", imgWith || false, true, false) + pug_attr("height", imgHeight || false, true, false)) + '/></td></tr><tr><td' + (" class=\"content\"" + pug_attr("style", pug_style(parseStyle({
-                'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
-                'font-size': fontSize,
-                'color': fontColor,
-                'line-height': lineHeight
-            })), true, false)) + '>';
-            // iterate childNodes
-            (function () {
-                var $$obj = childNodes;
-                if ('number' == typeof $$obj.length) {
-                    for (var pug_index1 = 0, $$l = $$obj.length; pug_index1 < $$l; pug_index1++) {
-                        var childNode = $$obj[pug_index1];
-                        pug_mixins["createPartialPug"](childNode, node);
+            if (src) {
+                pug_html = pug_html + '<table' + (" class=\"banner section\"" + pug_attr("style", pug_style(parseStyle({
+                    'background-color': bgColor
+                })), true, false) + pug_attr("bgColor", bgColor || false, true, false)) + '><tbody><tr><td><img' + (pug_attr("src", src || false, true, false) + pug_attr("alt", alt || false, true, false) + pug_attr("width", imgWith || false, true, false) + pug_attr("height", imgHeight || false, true, false)) + '/></td></tr><tr><td' + (" class=\"content\"" + pug_attr("style", pug_style(parseStyle({
+                    'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                    'font-size': fontSize,
+                    'color': fontColor,
+                    'line-height': lineHeight
+                })), true, false)) + '>';
+                // iterate childNodes
+                (function () {
+                    var $$obj = childNodes;
+                    if ('number' == typeof $$obj.length) {
+                        for (var pug_index1 = 0, $$l = $$obj.length; pug_index1 < $$l; pug_index1++) {
+                            var childNode = $$obj[pug_index1];
+                            pug_mixins["createPartialPug"](childNode, node);
+                        }
+                    } else {
+                        var $$l = 0;
+                        for (var pug_index1 in $$obj) {
+                            $$l++;
+                            var childNode = $$obj[pug_index1];
+                            pug_mixins["createPartialPug"](childNode, node);
+                        }
                     }
-                } else {
-                    var $$l = 0;
-                    for (var pug_index1 in $$obj) {
-                        $$l++;
-                        var childNode = $$obj[pug_index1];
-                        pug_mixins["createPartialPug"](childNode, node);
-                    }
-                }
-            }).call(this);
+                }).call(this);
 
-            pug_html = pug_html + '</td></tr></tbody></table>';
+                pug_html = pug_html + '</td></tr></tbody></table>';
+            } else {
+                pug_html = pug_html + '<div' + pug_attr("style", pug_style(parseStyle({
+                    'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                    'background-color': bgColor,
+                    'line-height': lineHeight
+                })), true, false) + '>';
+                // iterate childNodes
+                (function () {
+                    var $$obj = childNodes;
+                    if ('number' == typeof $$obj.length) {
+                        for (var pug_index2 = 0, $$l = $$obj.length; pug_index2 < $$l; pug_index2++) {
+                            var childNode = $$obj[pug_index2];
+                            pug_mixins["createPartialPug"](childNode, node);
+                        }
+                    } else {
+                        var $$l = 0;
+                        for (var pug_index2 in $$obj) {
+                            $$l++;
+                            var childNode = $$obj[pug_index2];
+                            pug_mixins["createPartialPug"](childNode, node);
+                        }
+                    }
+                }).call(this);
+
+                pug_html = pug_html + '</div>';
+            }
         };
         pug_mixins["TITLE_CONTENT"] = _pug_interp4 = function pug_interp(node, parentNode) {
             var block = this && this.block,
@@ -365,15 +392,15 @@ function pug_style(r) {
             (function () {
                 var $$obj = childNodes;
                 if ('number' == typeof $$obj.length) {
-                    for (var pug_index2 = 0, $$l = $$obj.length; pug_index2 < $$l; pug_index2++) {
-                        var childNode = $$obj[pug_index2];
+                    for (var pug_index3 = 0, $$l = $$obj.length; pug_index3 < $$l; pug_index3++) {
+                        var childNode = $$obj[pug_index3];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 } else {
                     var $$l = 0;
-                    for (var pug_index2 in $$obj) {
+                    for (var pug_index3 in $$obj) {
                         $$l++;
-                        var childNode = $$obj[pug_index2];
+                        var childNode = $$obj[pug_index3];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 }
@@ -419,25 +446,27 @@ function pug_style(r) {
             var paddingRight = node.paddingRight;
             var paddingTop = node.paddingTop;
             var paddingBottom = node.paddingBottom;
+            var lineHeight = node.lineHeight;
             var childNodes = node.childNodes;
 
             pug_html = pug_html + '<div' + pug_attr("style", pug_style(parseStyle({
                 'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
-                'background-color': bgColor
+                'background-color': bgColor,
+                'line-height': lineHeight
             })), true, false) + '>';
             // iterate childNodes
             (function () {
                 var $$obj = childNodes;
                 if ('number' == typeof $$obj.length) {
-                    for (var pug_index3 = 0, $$l = $$obj.length; pug_index3 < $$l; pug_index3++) {
-                        var childNode = $$obj[pug_index3];
+                    for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
+                        var childNode = $$obj[pug_index4];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 } else {
                     var $$l = 0;
-                    for (var pug_index3 in $$obj) {
+                    for (var pug_index4 in $$obj) {
                         $$l++;
-                        var childNode = $$obj[pug_index3];
+                        var childNode = $$obj[pug_index4];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 }
@@ -456,11 +485,13 @@ function pug_style(r) {
             var paddingRight = node.paddingRight;
             var paddingTop = node.paddingTop;
             var paddingBottom = node.paddingBottom;
+            var bold = node.bold;
             pug_html = pug_html + '<p' + pug_attr("style", pug_style(parseStyle({
                 'color': fontColor,
                 'font-size': fontSize,
                 'line-height': lineHeight,
-                'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
+                'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                'font-weight': bold ? 'bold' : false
             })), true, false) + '>' + pug_escape(null == (_pug_interp4 = text) ? "" : _pug_interp4) + '</p>';
         };
         pug_mixins["HTML"] = _pug_interp4 = function _pug_interp3(node, parentNode) {
@@ -504,15 +535,15 @@ function pug_style(r) {
             (function () {
                 var $$obj = childNodes;
                 if ('number' == typeof $$obj.length) {
-                    for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
-                        var childNode = $$obj[pug_index4];
+                    for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
+                        var childNode = $$obj[pug_index5];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 } else {
                     var $$l = 0;
-                    for (var pug_index4 in $$obj) {
+                    for (var pug_index5 in $$obj) {
                         $$l++;
-                        var childNode = $$obj[pug_index4];
+                        var childNode = $$obj[pug_index5];
                         pug_mixins["createPartialPug"](childNode, node);
                     }
                 }
@@ -530,8 +561,8 @@ function pug_style(r) {
             (function () {
                 var $$obj = childNodes;
                 if ('number' == typeof $$obj.length) {
-                    for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
-                        var childNode = $$obj[pug_index5];
+                    for (var pug_index6 = 0, $$l = $$obj.length; pug_index6 < $$l; pug_index6++) {
+                        var childNode = $$obj[pug_index6];
                         pug_html = pug_html + '<span' + pug_attr("style", pug_style(parseStyle({
                             'color': fontColor
                         })), true, false) + '>';
@@ -540,9 +571,9 @@ function pug_style(r) {
                     }
                 } else {
                     var $$l = 0;
-                    for (var pug_index5 in $$obj) {
+                    for (var pug_index6 in $$obj) {
                         $$l++;
-                        var childNode = $$obj[pug_index5];
+                        var childNode = $$obj[pug_index6];
                         pug_html = pug_html + '<span' + pug_attr("style", pug_style(parseStyle({
                             'color': fontColor
                         })), true, false) + '>';

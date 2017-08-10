@@ -9,12 +9,14 @@ mixin TEXT(node, parentNode)
         var paddingRight = node.paddingRight;
         var paddingTop = node.paddingTop;
         var paddingBottom = node.paddingBottom;
+        var bold = node.bold;
     p(
         style=parseStyle({
             'color': fontColor,
             'font-size': fontSize,
             'line-height': lineHeight,
-            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
+            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+            'font-weight': bold ? 'bold' : false
         })
     )
         | #{text}

@@ -82,7 +82,8 @@ var CONTAINER = {
         {name: 'paddingLeft', type: 'string', defaultValue: '40px'},
         {name: 'paddingTop', type: 'string', defaultValue: '40px'},
         {name: 'paddingRight', type: 'string', defaultValue: '40px'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '40px'}
+        {name: 'paddingBottom', type: 'string', defaultValue: '40px'},
+        {name: 'lineHeight', type:'string', defaultValue: '30px'}
     ],
     isContainer: true
 };
@@ -96,7 +97,8 @@ var TEXT = {
         {name: 'paddingLeft', type: 'string', defaultValue: '0'},
         {name: 'paddingTop', type: 'string', defaultValue: '0'},
         {name: 'paddingRight', type: 'string', defaultValue: '0'},
-        {name: 'paddingBottom', type: 'string', defaultValue: '0'}
+        {name: 'paddingBottom', type: 'string', defaultValue: '0'},
+        {name: 'bold', type: 'boolean', defaultValue: false}
     ],
     isContainer: false
 };
@@ -281,14 +283,15 @@ var paddingBottom = node.paddingBottom;
 var imgWith = node.imgWidth;
 var imgHeight = node.imgHeight;
 
+if (src) {
 pug_html = pug_html + "\u003Ctable" + (" class=\"banner section\""+pug_attr("style", pug_style(parseStyle({
-            'background-color': bgColor
-        })), true, false)+pug_attr("bgColor", bgColor || false, true, false)) + "\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Cimg" + (pug_attr("src", src || false, true, false)+pug_attr("alt", alt || false, true, false)+pug_attr("width", imgWith || false, true, false)+pug_attr("height", imgHeight || false, true, false)) + "\u002F\u003E\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E\u003Ctr\u003E\u003Ctd" + (" class=\"content\""+pug_attr("style", pug_style(parseStyle({
-                        'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
-                        'font-size': fontSize,
-                        'color': fontColor,
-                        'line-height': lineHeight
-                    })), true, false)) + "\u003E";
+                'background-color': bgColor
+            })), true, false)+pug_attr("bgColor", bgColor || false, true, false)) + "\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Cimg" + (pug_attr("src", src || false, true, false)+pug_attr("alt", alt || false, true, false)+pug_attr("width", imgWith || false, true, false)+pug_attr("height", imgHeight || false, true, false)) + "\u002F\u003E\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E\u003Ctr\u003E\u003Ctd" + (" class=\"content\""+pug_attr("style", pug_style(parseStyle({
+                            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                            'font-size': fontSize,
+                            'color': fontColor,
+                            'line-height': lineHeight
+                        })), true, false)) + "\u003E";
 // iterate childNodes
 (function(){
   var $$obj = childNodes;
@@ -308,6 +311,33 @@ pug_mixins["createPartialPug"](childNode, node);
 }).call(this);
 
 pug_html = pug_html + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E\u003C\u002Ftbody\u003E\u003C\u002Ftable\u003E";
+}
+else {
+pug_html = pug_html + "\u003Cdiv" + (pug_attr("style", pug_style(parseStyle({
+                'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                'background-color': bgColor,
+                'line-height': lineHeight
+            })), true, false)) + "\u003E";
+// iterate childNodes
+(function(){
+  var $$obj = childNodes;
+  if ('number' == typeof $$obj.length) {
+      for (var pug_index2 = 0, $$l = $$obj.length; pug_index2 < $$l; pug_index2++) {
+        var childNode = $$obj[pug_index2];
+pug_mixins["createPartialPug"](childNode, node);
+      }
+  } else {
+    var $$l = 0;
+    for (var pug_index2 in $$obj) {
+      $$l++;
+      var childNode = $$obj[pug_index2];
+pug_mixins["createPartialPug"](childNode, node);
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+}
 };
 pug_mixins["TITLE_CONTENT"] = pug_interp = function(node, parentNode){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -340,15 +370,15 @@ pug_html = pug_html + "\u003Ctable" + (" class=\"title section\""+pug_attr("styl
 (function(){
   var $$obj = childNodes;
   if ('number' == typeof $$obj.length) {
-      for (var pug_index2 = 0, $$l = $$obj.length; pug_index2 < $$l; pug_index2++) {
-        var childNode = $$obj[pug_index2];
+      for (var pug_index3 = 0, $$l = $$obj.length; pug_index3 < $$l; pug_index3++) {
+        var childNode = $$obj[pug_index3];
 pug_mixins["createPartialPug"](childNode, node);
       }
   } else {
     var $$l = 0;
-    for (var pug_index2 in $$obj) {
+    for (var pug_index3 in $$obj) {
       $$l++;
-      var childNode = $$obj[pug_index2];
+      var childNode = $$obj[pug_index3];
 pug_mixins["createPartialPug"](childNode, node);
     }
   }
@@ -389,25 +419,27 @@ var paddingLeft = node.paddingLeft;
 var paddingRight = node.paddingRight;
 var paddingTop = node.paddingTop;
 var paddingBottom = node.paddingBottom;
+var lineHeight = node.lineHeight;
 var childNodes = node.childNodes;
 
 pug_html = pug_html + "\u003Cdiv" + (pug_attr("style", pug_style(parseStyle({
             'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
-            'background-color': bgColor
+            'background-color': bgColor,
+            'line-height': lineHeight
         })), true, false)) + "\u003E";
 // iterate childNodes
 (function(){
   var $$obj = childNodes;
   if ('number' == typeof $$obj.length) {
-      for (var pug_index3 = 0, $$l = $$obj.length; pug_index3 < $$l; pug_index3++) {
-        var childNode = $$obj[pug_index3];
+      for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
+        var childNode = $$obj[pug_index4];
 pug_mixins["createPartialPug"](childNode, node);
       }
   } else {
     var $$l = 0;
-    for (var pug_index3 in $$obj) {
+    for (var pug_index4 in $$obj) {
       $$l++;
-      var childNode = $$obj[pug_index3];
+      var childNode = $$obj[pug_index4];
 pug_mixins["createPartialPug"](childNode, node);
     }
   }
@@ -425,11 +457,13 @@ var paddingLeft = node.paddingLeft;
 var paddingRight = node.paddingRight;
 var paddingTop = node.paddingTop;
 var paddingBottom = node.paddingBottom;
+var bold = node.bold;
 pug_html = pug_html + "\u003Cp" + (pug_attr("style", pug_style(parseStyle({
             'color': fontColor,
             'font-size': fontSize,
             'line-height': lineHeight,
-            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
+            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+            'font-weight': bold ? 'bold' : false
         })), true, false)) + "\u003E" + (pug_escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 };
 pug_mixins["HTML"] = pug_interp = function(node, parentNode){
@@ -471,15 +505,15 @@ pug_html = pug_html + "\u003Cul" + (pug_attr("style", pug_style(parseStyle({
 (function(){
   var $$obj = childNodes;
   if ('number' == typeof $$obj.length) {
-      for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
-        var childNode = $$obj[pug_index4];
+      for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
+        var childNode = $$obj[pug_index5];
 pug_mixins["createPartialPug"](childNode, node);
       }
   } else {
     var $$l = 0;
-    for (var pug_index4 in $$obj) {
+    for (var pug_index5 in $$obj) {
       $$l++;
-      var childNode = $$obj[pug_index4];
+      var childNode = $$obj[pug_index5];
 pug_mixins["createPartialPug"](childNode, node);
     }
   }
@@ -496,8 +530,8 @@ pug_html = pug_html + "\u003Cli\u003E";
 (function(){
   var $$obj = childNodes;
   if ('number' == typeof $$obj.length) {
-      for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
-        var childNode = $$obj[pug_index5];
+      for (var pug_index6 = 0, $$l = $$obj.length; pug_index6 < $$l; pug_index6++) {
+        var childNode = $$obj[pug_index6];
 pug_html = pug_html + "\u003Cspan" + (pug_attr("style", pug_style(parseStyle({
                     'color': fontColor
                 })), true, false)) + "\u003E";
@@ -506,9 +540,9 @@ pug_html = pug_html + "\u003C\u002Fspan\u003E";
       }
   } else {
     var $$l = 0;
-    for (var pug_index5 in $$obj) {
+    for (var pug_index6 in $$obj) {
       $$l++;
-      var childNode = $$obj[pug_index5];
+      var childNode = $$obj[pug_index6];
 pug_html = pug_html + "\u003Cspan" + (pug_attr("style", pug_style(parseStyle({
                     'color': fontColor
                 })), true, false)) + "\u003E";

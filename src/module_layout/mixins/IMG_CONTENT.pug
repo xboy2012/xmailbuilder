@@ -15,29 +15,40 @@ mixin IMG_CONTENT(node, parentNode)
         var imgWith = node.imgWidth;
         var imgHeight = node.imgHeight;
 
-    table.banner.section(
-        style=parseStyle({
-            'background-color': bgColor
-        }),
-        bgColor=bgColor || false
-    )
-        tbody
-            tr
-                td
-                    img(
-                        src=src || false,
-                        alt=alt || false,
-                        width=imgWith || false,
-                        height=imgHeight || false
+    if src
+        table.banner.section(
+            style=parseStyle({
+                'background-color': bgColor
+            }),
+            bgColor=bgColor || false
+        )
+            tbody
+                tr
+                    td
+                        img(
+                            src=src || false,
+                            alt=alt || false,
+                            width=imgWith || false,
+                            height=imgHeight || false
+                        )
+                tr
+                    td.content(
+                        style=parseStyle({
+                            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                            'font-size': fontSize,
+                            'color': fontColor,
+                            'line-height': lineHeight
+                        })
                     )
-            tr
-                td.content(
-                    style=parseStyle({
-                        'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
-                        'font-size': fontSize,
-                        'color': fontColor,
-                        'line-height': lineHeight
-                    })
-                )
-                    each childNode in childNodes
-                        +createPartialPug(childNode, node)
+                        each childNode in childNodes
+                            +createPartialPug(childNode, node)
+    else
+        div(
+            style=parseStyle({
+                'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                'background-color': bgColor,
+                'line-height': lineHeight
+            })
+        )
+            each childNode in childNodes
+                +createPartialPug(childNode, node)
