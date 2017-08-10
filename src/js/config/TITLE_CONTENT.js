@@ -4,7 +4,7 @@ export default {
         {name: 'fontSize', type: 'string', defaultValue: ''},
         {name: 'fontColor', type: 'string', defaultValue: ''},
         {name: 'lineHeight', type: 'string', defaultValue: '30px'},
-        {name: 'bgColor', type: 'string', defaultValue: ''},
+        {name: 'bgColor', type: 'string', defaultValue: '#fff'},
         {name: 'paddingLeft', type: 'string', defaultValue: '40px'},
         {name: 'paddingTop', type: 'string', defaultValue: '40px'},
         {name: 'paddingRight', type: 'string', defaultValue: '40px'},
