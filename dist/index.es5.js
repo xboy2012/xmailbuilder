@@ -29,7 +29,7 @@ var MAIN = {
 };
 
 var IMG_CONTENT = {
-    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/20170712_01/3.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片容器' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/20170712_01/3.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片容器' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '10px' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '10px' }],
     isContainer: true
 };
 
@@ -49,7 +49,7 @@ var SIGNATURE = {
 };
 
 var IMG = {
-    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/p1.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片简介' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/p1.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片简介' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '10px' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '10px' }],
     isContainer: false
 };
 

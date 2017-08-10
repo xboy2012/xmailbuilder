@@ -5,9 +5,9 @@ export default {
         {name: 'imgWidth', type: 'string', defaultValue: ''},
         {name: 'imgHeight', type: 'string', defaultValue: ''},
         {name: 'marginLeft', type: 'string', defaultValue: '0'},
-        {name: 'marginTop', type: 'string', defaultValue: '0'},
+        {name: 'marginTop', type: 'string', defaultValue: '10px'},
         {name: 'marginRight', type: 'string', defaultValue: '0'},
-        {name: 'marginBottom', type: 'string', defaultValue: '0'}
+        {name: 'marginBottom', type: 'string', defaultValue: '10px'}
     ],
     isContainer: false
 };
