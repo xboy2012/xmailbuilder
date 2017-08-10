@@ -11,10 +11,15 @@ mixin TITLE_CONTENT(node, parentNode)
         var paddingRight = node.paddingRight;
         var paddingTop = node.paddingTop;
         var paddingBottom = node.paddingBottom;
+        var marginLeft = node.marginLeft;
+        var marginTop = node.marginTop;
+        var marginRight = node.marginRight;
+        var marginBottom = node.marginBottom;
 
     table.title.section(
         style=parseStyle({
-            'background-color': bgColor
+            'background-color': bgColor,
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
         }),
         bgcolor=bgColor || false
     )

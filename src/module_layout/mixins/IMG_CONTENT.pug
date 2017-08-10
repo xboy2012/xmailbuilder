@@ -14,11 +14,16 @@ mixin IMG_CONTENT(node, parentNode)
         var paddingBottom = node.paddingBottom;
         var imgWith = node.imgWidth;
         var imgHeight = node.imgHeight;
+        var marginLeft = node.marginLeft;
+        var marginTop = node.marginTop;
+        var marginRight = node.marginRight;
+        var marginBottom = node.marginBottom;
 
     if src
         table.banner.section(
             style=parseStyle({
-                'background-color': bgColor
+                'background-color': bgColor,
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
             }),
             bgColor=bgColor || false
         )
@@ -46,6 +51,7 @@ mixin IMG_CONTENT(node, parentNode)
         div(
             style=parseStyle({
                 'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
                 'background-color': bgColor,
                 'line-height': lineHeight,
                 'border-radius': '10px'

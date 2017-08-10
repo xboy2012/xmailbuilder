@@ -6,13 +6,17 @@ mixin LIST(node, parentNode)
         var paddingRight = node.paddingRight;
         var paddingTop = node.paddingTop;
         var paddingBottom = node.paddingBottom;
+        var marginLeft = node.marginLeft;
+        var marginTop = node.marginTop;
+        var marginRight = node.marginRight;
+        var marginBottom = node.marginBottom;
         var childNodes = node.childNodes;
     ul(
         style=parseStyle({
-            'margin': 0,
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
             'list-style-type': 'disc',
             'color': bulletColor,
-            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
+            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
         })
     )
         each childNode in childNodes

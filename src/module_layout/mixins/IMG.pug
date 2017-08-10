@@ -5,9 +5,16 @@ mixin IMG(node, parentNode)
         var alt = node.alt;
         var imgWith = node.imgWidth;
         var imgHeight = node.imgHeight;
+        var marginLeft = node.marginLeft;
+        var marginTop = node.marginTop;
+        var marginRight = node.marginRight;
+        var marginBottom = node.marginBottom;
     img(
         src=src,
         alt=(alt || false),
         width=(imgWith || false),
-        height=(imgHeight || false)
+        height=(imgHeight || false),
+        style=parseStyle({
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
+        })
     )

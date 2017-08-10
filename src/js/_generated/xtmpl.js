@@ -77,10 +77,15 @@ var paddingTop = node.paddingTop;
 var paddingBottom = node.paddingBottom;
 var imgWith = node.imgWidth;
 var imgHeight = node.imgHeight;
+var marginLeft = node.marginLeft;
+var marginTop = node.marginTop;
+var marginRight = node.marginRight;
+var marginBottom = node.marginBottom;
 
 if (src) {
 pug_html = pug_html + "\u003Ctable" + (" class=\"banner section\""+pug_attr("style", pug_style(parseStyle({
-                'background-color': bgColor
+                'background-color': bgColor,
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
             })), true, false)+pug_attr("bgColor", bgColor || false, true, false)) + "\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Cimg" + (pug_attr("src", src || false, true, false)+pug_attr("alt", alt || false, true, false)+pug_attr("width", imgWith || false, true, false)+pug_attr("height", imgHeight || false, true, false)) + "\u002F\u003E\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E\u003Ctr\u003E\u003Ctd" + (" class=\"content\""+pug_attr("style", pug_style(parseStyle({
                             'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
                             'font-size': fontSize,
@@ -110,6 +115,7 @@ pug_html = pug_html + "\u003C\u002Ftd\u003E\u003C\u002Ftr\u003E\u003C\u002Ftbody
 else {
 pug_html = pug_html + "\u003Cdiv" + (pug_attr("style", pug_style(parseStyle({
                 'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
                 'background-color': bgColor,
                 'line-height': lineHeight,
                 'border-radius': '10px'
@@ -147,9 +153,14 @@ var paddingLeft = node.paddingLeft;
 var paddingRight = node.paddingRight;
 var paddingTop = node.paddingTop;
 var paddingBottom = node.paddingBottom;
+var marginLeft = node.marginLeft;
+var marginTop = node.marginTop;
+var marginRight = node.marginRight;
+var marginBottom = node.marginBottom;
 
 pug_html = pug_html + "\u003Ctable" + (" class=\"title section\""+pug_attr("style", pug_style(parseStyle({
-            'background-color': bgColor
+            'background-color': bgColor,
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
         })), true, false)+pug_attr("bgcolor", bgColor || false, true, false)) + "\u003E\u003Ctbody\u003E\u003Ctr\u003E\u003Cth\u003E\u003Cp" + (pug_attr("style", pug_style(parseStyle({
                             'color': fontColor,
                             'background-image': bgColor && 'url("https://bqq.gtimg.com/qidian/src/themes/client/email/mail2-images/titleline_bg.png")',
@@ -197,7 +208,13 @@ var src = node.src;
 var alt = node.alt;
 var imgWith = node.imgWidth;
 var imgHeight = node.imgHeight;
-pug_html = pug_html + "\u003Cimg" + (pug_attr("src", src, true, false)+pug_attr("alt", (alt || false), true, false)+pug_attr("width", (imgWith || false), true, false)+pug_attr("height", (imgHeight || false), true, false)) + "\u002F\u003E";
+var marginLeft = node.marginLeft;
+var marginTop = node.marginTop;
+var marginRight = node.marginRight;
+var marginBottom = node.marginBottom;
+pug_html = pug_html + "\u003Cimg" + (pug_attr("src", src, true, false)+pug_attr("alt", (alt || false), true, false)+pug_attr("width", (imgWith || false), true, false)+pug_attr("height", (imgHeight || false), true, false)+pug_attr("style", pug_style(parseStyle({
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
+        })), true, false)) + "\u002F\u003E";
 };
 pug_mixins["IMG_LINK"] = pug_interp = function(node, parentNode){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -206,7 +223,13 @@ var alt = node.alt;
 var url = node.url;
 var imgWith = node.imgWidth;
 var imgHeight = node.imgHeight;
-pug_html = pug_html + "\u003Ca" + (pug_attr("href", url, true, false)+" target=\"_blank\"") + "\u003E\u003Cimg" + (pug_attr("src", src || false, true, false)+pug_attr("alt", alt || false, true, false)+pug_attr("width", imgWith || false, true, false)+pug_attr("height", imgHeight || false, true, false)) + "\u002F\u003E\u003C\u002Fa\u003E";
+var marginLeft = node.marginLeft;
+var marginTop = node.marginTop;
+var marginRight = node.marginRight;
+var marginBottom = node.marginBottom;
+pug_html = pug_html + "\u003Ca" + (pug_attr("href", url, true, false)+" target=\"_blank\"") + "\u003E\u003Cimg" + (pug_attr("src", src || false, true, false)+pug_attr("alt", alt || false, true, false)+pug_attr("width", imgWith || false, true, false)+pug_attr("height", imgHeight || false, true, false)+pug_attr("style", pug_style(parseStyle({
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
+            })), true, false)) + "\u002F\u003E\u003C\u002Fa\u003E";
 };
 pug_mixins["CONTAINER"] = pug_interp = function(node, parentNode){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -216,10 +239,15 @@ var paddingRight = node.paddingRight;
 var paddingTop = node.paddingTop;
 var paddingBottom = node.paddingBottom;
 var lineHeight = node.lineHeight;
+var marginLeft = node.marginLeft;
+var marginTop = node.marginTop;
+var marginRight = node.marginRight;
+var marginBottom = node.marginBottom;
 var childNodes = node.childNodes;
 
 pug_html = pug_html + "\u003Cdiv" + (pug_attr("style", pug_style(parseStyle({
             'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
             'background-color': bgColor,
             'line-height': lineHeight
         })), true, false)) + "\u003E";
@@ -290,12 +318,16 @@ var paddingLeft = node.paddingLeft;
 var paddingRight = node.paddingRight;
 var paddingTop = node.paddingTop;
 var paddingBottom = node.paddingBottom;
+var marginLeft = node.marginLeft;
+var marginTop = node.marginTop;
+var marginRight = node.marginRight;
+var marginBottom = node.marginBottom;
 var childNodes = node.childNodes;
 pug_html = pug_html + "\u003Cul" + (pug_attr("style", pug_style(parseStyle({
-            'margin': 0,
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
             'list-style-type': 'disc',
             'color': bulletColor,
-            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
+            'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
         })), true, false)) + "\u003E";
 // iterate childNodes
 ;(function(){

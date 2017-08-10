@@ -29,12 +29,12 @@ var MAIN = {
 };
 
 var IMG_CONTENT = {
-    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/20170712_01/3.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片容器' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/20170712_01/3.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片容器' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
 var TITLE_CONTENT = {
-    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }],
+    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
@@ -49,17 +49,17 @@ var SIGNATURE = {
 };
 
 var IMG = {
-    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/p1.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片简介' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/p1.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片简介' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: false
 };
 
 var IMG_LINK = {
-    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/wechat-qrcode.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片超链接' }, { name: 'url', type: 'string', defaultValue: 'https://qidian.qq.com' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/images-1.7.0/images/wechat-qrcode.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片超链接' }, { name: 'url', type: 'string', defaultValue: 'https://qidian.qq.com' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: false
 };
 
 var CONTAINER = {
-    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }],
+    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
@@ -79,7 +79,7 @@ var BLANK = {
 };
 
 var LIST = {
-    properties: [{ name: 'bulletColor', type: 'string', defaultValue: '#007aff' }, { name: 'fontColor', type: 'string', defaultValue: '#000' }, { name: 'paddingLeft', type: 'string', defaultValue: '60px' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'bulletColor', type: 'string', defaultValue: '#007aff' }, { name: 'fontColor', type: 'string', defaultValue: '#000' }, { name: 'paddingLeft', type: 'string', defaultValue: '60px' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
@@ -304,10 +304,15 @@ function pug_style(r) {
             var paddingBottom = node.paddingBottom;
             var imgWith = node.imgWidth;
             var imgHeight = node.imgHeight;
+            var marginLeft = node.marginLeft;
+            var marginTop = node.marginTop;
+            var marginRight = node.marginRight;
+            var marginBottom = node.marginBottom;
 
             if (src) {
                 pug_html = pug_html + '<table' + (" class=\"banner section\"" + pug_attr("style", pug_style(parseStyle({
-                    'background-color': bgColor
+                    'background-color': bgColor,
+                    'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
                 })), true, false) + pug_attr("bgColor", bgColor || false, true, false)) + '><tbody><tr><td><img' + (pug_attr("src", src || false, true, false) + pug_attr("alt", alt || false, true, false) + pug_attr("width", imgWith || false, true, false) + pug_attr("height", imgHeight || false, true, false)) + '/></td></tr><tr><td' + (" class=\"content\"" + pug_attr("style", pug_style(parseStyle({
                     'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
                     'font-size': fontSize,
@@ -336,6 +341,7 @@ function pug_style(r) {
             } else {
                 pug_html = pug_html + '<div' + pug_attr("style", pug_style(parseStyle({
                     'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                    'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
                     'background-color': bgColor,
                     'line-height': lineHeight,
                     'border-radius': '10px'
@@ -374,9 +380,14 @@ function pug_style(r) {
             var paddingRight = node.paddingRight;
             var paddingTop = node.paddingTop;
             var paddingBottom = node.paddingBottom;
+            var marginLeft = node.marginLeft;
+            var marginTop = node.marginTop;
+            var marginRight = node.marginRight;
+            var marginBottom = node.marginBottom;
 
             pug_html = pug_html + '<table' + (" class=\"title section\"" + pug_attr("style", pug_style(parseStyle({
-                'background-color': bgColor
+                'background-color': bgColor,
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
             })), true, false) + pug_attr("bgcolor", bgColor || false, true, false)) + '><tbody><tr><th><p' + pug_attr("style", pug_style(parseStyle({
                 'color': fontColor,
                 'background-image': bgColor && 'url("https://bqq.gtimg.com/qidian/src/themes/client/email/mail2-images/titleline_bg.png")',
@@ -427,7 +438,13 @@ function pug_style(r) {
             var alt = node.alt;
             var imgWith = node.imgWidth;
             var imgHeight = node.imgHeight;
-            pug_html = pug_html + '<img' + (pug_attr("src", src, true, false) + pug_attr("alt", alt || false, true, false) + pug_attr("width", imgWith || false, true, false) + pug_attr("height", imgHeight || false, true, false)) + '/>';
+            var marginLeft = node.marginLeft;
+            var marginTop = node.marginTop;
+            var marginRight = node.marginRight;
+            var marginBottom = node.marginBottom;
+            pug_html = pug_html + '<img' + (pug_attr("src", src, true, false) + pug_attr("alt", alt || false, true, false) + pug_attr("width", imgWith || false, true, false) + pug_attr("height", imgHeight || false, true, false) + pug_attr("style", pug_style(parseStyle({
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
+            })), true, false)) + '/>';
         };
         pug_mixins["IMG_LINK"] = _pug_interp4 = function _pug_interp2(node, parentNode) {
             var block = this && this.block,
@@ -437,7 +454,13 @@ function pug_style(r) {
             var url = node.url;
             var imgWith = node.imgWidth;
             var imgHeight = node.imgHeight;
-            pug_html = pug_html + '<a' + (pug_attr("href", url, true, false) + " target=\"_blank\"") + '><img' + (pug_attr("src", src || false, true, false) + pug_attr("alt", alt || false, true, false) + pug_attr("width", imgWith || false, true, false) + pug_attr("height", imgHeight || false, true, false)) + '/></a>';
+            var marginLeft = node.marginLeft;
+            var marginTop = node.marginTop;
+            var marginRight = node.marginRight;
+            var marginBottom = node.marginBottom;
+            pug_html = pug_html + '<a' + (pug_attr("href", url, true, false) + " target=\"_blank\"") + '><img' + (pug_attr("src", src || false, true, false) + pug_attr("alt", alt || false, true, false) + pug_attr("width", imgWith || false, true, false) + pug_attr("height", imgHeight || false, true, false) + pug_attr("style", pug_style(parseStyle({
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft
+            })), true, false)) + '/></a>';
         };
         pug_mixins["CONTAINER"] = _pug_interp4 = function _pug_interp2(node, parentNode) {
             var block = this && this.block,
@@ -448,10 +471,15 @@ function pug_style(r) {
             var paddingTop = node.paddingTop;
             var paddingBottom = node.paddingBottom;
             var lineHeight = node.lineHeight;
+            var marginLeft = node.marginLeft;
+            var marginTop = node.marginTop;
+            var marginRight = node.marginRight;
+            var marginBottom = node.marginBottom;
             var childNodes = node.childNodes;
 
             pug_html = pug_html + '<div' + pug_attr("style", pug_style(parseStyle({
                 'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
                 'background-color': bgColor,
                 'line-height': lineHeight
             })), true, false) + '>';
@@ -525,9 +553,13 @@ function pug_style(r) {
             var paddingRight = node.paddingRight;
             var paddingTop = node.paddingTop;
             var paddingBottom = node.paddingBottom;
+            var marginLeft = node.marginLeft;
+            var marginTop = node.marginTop;
+            var marginRight = node.marginRight;
+            var marginBottom = node.marginBottom;
             var childNodes = node.childNodes;
             pug_html = pug_html + '<ul' + pug_attr("style", pug_style(parseStyle({
-                'margin': 0,
+                'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
                 'list-style-type': 'disc',
                 'color': bulletColor,
                 'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft
@@ -622,7 +654,7 @@ function pug_style(r) {
     }).call(this, "node" in locals_for_with ? locals_for_with.node : typeof node !== "undefined" ? node : undefined);return pug_html;
 }
 
-var css_code = "::-webkit-scrollbar{display:none}a{text-decoration:none}a:not(.nolink){color:#0067ed;cursor:pointer}.main,body,p{margin:0;padding:0}img{display:inline-block;border:0}table{border-collapse:collapse;border:0}.main{font-family:Helvetica,\"Helvetica Neue\",\"Helvetica Neue Light\",HelveticaNeue-Light,'微软雅黑','Microsoft Yahei',Calibri,Arial,sans-serif;padding:40px}.main>table,.section,img{margin:auto}.section{background-color:#fff;border-radius:10px;overflow:hidden;width:640px}.section.title>tbody>tr>th{padding:32px 40px 0;font-weight:400}.section.title>tbody>tr>th>p{text-align:center;font-size:26px;margin:0}.section.title>tbody>tr>th>p>span{padding:0 15px}";
+var css_code = "::-webkit-scrollbar{display:none}a{text-decoration:none}a:not(.nolink){color:#0067ed;cursor:pointer}.main,body,p{margin:0;padding:0}img{display:inline-block;border:0}table{border-collapse:collapse;border:0}.main{font-family:Helvetica,\"Helvetica Neue\",\"Helvetica Neue Light\",HelveticaNeue-Light,'微软雅黑','Microsoft Yahei',Calibri,Arial,sans-serif;padding:40px 0}.main>table,.section,img{margin:auto}.section{background-color:#fff;border-radius:10px;overflow:hidden;width:640px}.section.title>tbody>tr>th{padding:32px 40px 0;font-weight:400}.section.title>tbody>tr>th>p{text-align:center;font-size:26px;margin:0}.section.title>tbody>tr>th>p>span{padding:0 15px}";
 
 var buildHtmlFromNode = function buildHtmlFromNode(node) {
     var html_code = xtmpl({ node: node });

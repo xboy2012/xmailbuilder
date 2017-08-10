@@ -4,7 +4,11 @@ export default {
         {name: 'alt', type: 'string', defaultValue: '我是图片超链接'},
         {name: 'url', type: 'string', defaultValue: 'https://qidian.qq.com'},
         {name: 'imgWidth', type: 'string', defaultValue: ''},
-        {name: 'imgHeight', type: 'string', defaultValue: ''}
+        {name: 'imgHeight', type: 'string', defaultValue: ''},
+        {name: 'marginLeft', type: 'string', defaultValue: '0'},
+        {name: 'marginTop', type: 'string', defaultValue: '0'},
+        {name: 'marginRight', type: 'string', defaultValue: '0'},
+        {name: 'marginBottom', type: 'string', defaultValue: '0'}
     ],
     isContainer: false
 };

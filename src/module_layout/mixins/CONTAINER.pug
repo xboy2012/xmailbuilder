@@ -7,11 +7,16 @@ mixin CONTAINER(node, parentNode)
         var paddingTop = node.paddingTop;
         var paddingBottom = node.paddingBottom;
         var lineHeight = node.lineHeight;
+        var marginLeft = node.marginLeft;
+        var marginTop = node.marginTop;
+        var marginRight = node.marginRight;
+        var marginBottom = node.marginBottom;
         var childNodes = node.childNodes;
 
     div(
         style=parseStyle({
             'padding': paddingTop + ' ' + paddingRight + ' ' + paddingBottom + ' ' + paddingLeft,
+            'margin': marginTop + ' ' + marginRight + ' ' + marginBottom + ' ' + marginLeft,
             'background-color': bgColor,
             'line-height': lineHeight
         })
