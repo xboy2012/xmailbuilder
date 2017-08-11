@@ -1,6 +1,6 @@
 export default {
     properties: [
-        {name: 'fontColor', type: 'string', defaultValue: ''}
+        {name: 'fontColor', type: 'color', defaultValue: ''}
     ],
     isContainer: true
 };

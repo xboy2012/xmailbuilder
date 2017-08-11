@@ -1,6 +1,6 @@
 export default {
     properties: [
-        {name: 'bgColor', type: 'string', defaultValue: ''},
+        {name: 'bgColor', type: 'color', defaultValue: ''},
         {name: 'paddingLeft', type: 'string', defaultValue: '40px'},
         {name: 'paddingTop', type: 'string', defaultValue: '40px'},
         {name: 'paddingRight', type: 'string', defaultValue: '40px'},
