@@ -24,17 +24,17 @@ var _htmlclean2 = _interopRequireDefault(_htmlclean);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MAIN = {
-    properties: [{ name: 'bgColor', type: 'string', defaultValue: '#f0f1f2' }],
+    properties: [{ name: 'bgColor', type: 'color', defaultValue: '#f0f1f2' }],
     isContainer: true
 };
 
 var IMG_CONTENT = {
-    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/20170712_01/3.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片容器' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '10px' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '10px' }],
+    properties: [{ name: 'src', type: 'string', defaultValue: 'https://bqq.gtimg.com/qidian/src/themes/client/email/20170712_01/3.png' }, { name: 'alt', type: 'string', defaultValue: '我是图片容器' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'color', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'color', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'imgWidth', type: 'string', defaultValue: '' }, { name: 'imgHeight', type: 'string', defaultValue: '' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '10px' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '10px' }],
     isContainer: true
 };
 
 var TITLE_CONTENT = {
-    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'string', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'title', type: 'string', defaultValue: '这是标题' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'fontColor', type: 'color', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'bgColor', type: 'color', defaultValue: '#fff' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
@@ -59,17 +59,17 @@ var IMG_LINK = {
 };
 
 var CONTAINER = {
-    properties: [{ name: 'bgColor', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'bgColor', type: 'color', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '40px' }, { name: 'paddingTop', type: 'string', defaultValue: '40px' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '40px' }, { name: 'lineHeight', type: 'string', defaultValue: '30px' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
 var TEXT = {
-    properties: [{ name: 'text', type: 'string', defaultValue: '我是文本' }, { name: 'fontColor', type: 'string', defaultValue: '' }, { name: 'fontSize', type: 'string', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'bold', type: 'boolean', defaultValue: false }],
+    properties: [{ name: 'text', type: 'text', defaultValue: '我是文本' }, { name: 'fontColor', type: 'color', defaultValue: '' }, { name: 'fontSize', type: 'color', defaultValue: '' }, { name: 'lineHeight', type: 'string', defaultValue: '' }, { name: 'paddingLeft', type: 'string', defaultValue: '0' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '0' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'bold', type: 'boolean', defaultValue: false }],
     isContainer: false
 };
 
 var HTML = {
-    properties: [{ name: 'html', type: 'string', defaultValue: '<span style="color:red">我是</span><span style="color:green">一段</span><span style="color:blue">富文本</span>' }],
+    properties: [{ name: 'html', type: 'text', defaultValue: '<span style="color:red">我是</span><span style="color:green">一段</span><span style="color:blue">富文本</span>' }],
     isContainer: false
 };
 
@@ -79,12 +79,12 @@ var BLANK = {
 };
 
 var LIST = {
-    properties: [{ name: 'bulletColor', type: 'string', defaultValue: '#007aff' }, { name: 'fontColor', type: 'string', defaultValue: '#000' }, { name: 'paddingLeft', type: 'string', defaultValue: '60px' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
+    properties: [{ name: 'bulletColor', type: 'color', defaultValue: '#007aff' }, { name: 'fontColor', type: 'color', defaultValue: '#000' }, { name: 'paddingLeft', type: 'string', defaultValue: '60px' }, { name: 'paddingTop', type: 'string', defaultValue: '0' }, { name: 'paddingRight', type: 'string', defaultValue: '40px' }, { name: 'paddingBottom', type: 'string', defaultValue: '0' }, { name: 'marginLeft', type: 'string', defaultValue: '0' }, { name: 'marginTop', type: 'string', defaultValue: '0' }, { name: 'marginRight', type: 'string', defaultValue: '0' }, { name: 'marginBottom', type: 'string', defaultValue: '0' }],
     isContainer: true
 };
 
 var LIST_ITEM = {
-    properties: [{ name: 'fontColor', type: 'string', defaultValue: '' }],
+    properties: [{ name: 'fontColor', type: 'color', defaultValue: '' }],
     isContainer: true
 };
 
